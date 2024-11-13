@@ -12,6 +12,7 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         PanelRight = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         PanelLeft = new javax.swing.JPanel();
         Login = new javax.swing.JLabel();
         UsernameLabel = new javax.swing.JLabel();
@@ -32,15 +33,26 @@ public class Login extends javax.swing.JFrame {
         PanelRight.setBackground(new java.awt.Color(153, 153, 153));
         PanelRight.setPreferredSize(new java.awt.Dimension(400, 500));
 
+        jLabel2.setBackground(new java.awt.Color(225, 225, 225));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel2.setText("Film Equipments Rental");
+        jLabel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
+
         javax.swing.GroupLayout PanelRightLayout = new javax.swing.GroupLayout(PanelRight);
         PanelRight.setLayout(PanelRightLayout);
         PanelRightLayout.setHorizontalGroup(
             PanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(PanelRightLayout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(jLabel2)
+                .addContainerGap(128, Short.MAX_VALUE))
         );
         PanelRightLayout.setVerticalGroup(
             PanelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(PanelRightLayout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jLabel2)
+                .addContainerGap(387, Short.MAX_VALUE))
         );
 
         jPanel1.add(PanelRight);
@@ -239,6 +251,7 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel UsernameLabel;
     private javax.swing.JTextField UsernameTxt;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
