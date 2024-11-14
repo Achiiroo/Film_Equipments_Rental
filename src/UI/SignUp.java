@@ -1,6 +1,11 @@
 
 package UI;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 public class SignUp extends javax.swing.JFrame {
 
     /**
@@ -34,7 +39,6 @@ public class SignUp extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
         jPanel1.setLayout(null);
@@ -102,8 +106,8 @@ public class SignUp extends javax.swing.JFrame {
 
         SignUpBtn.setBackground(new java.awt.Color(153, 153, 153));
         SignUpBtn.setForeground(new java.awt.Color(255, 255, 255));
-        SignUpBtn.setText("Sign Up");
         SignUpBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        SignUpBtn.setLabel("SignUp");
         SignUpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SignUpBtnActionPerformed(evt);
@@ -209,28 +213,40 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordFldActionPerformed
 
     private void SignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpBtnActionPerformed
-        String Fullname, Email, Password;
+        String Fullname, Email, Password, query;
         String SUrl, SUser, SPass;
-
+        SUrl = "jdbc:MySQL://localhost:3306/user_database";
+        SUser = "root";
+        SPass = "";
+        
         try {
-            if (FullnameFld.getText().trim().isEmpty()) {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection(SUrl, SUser, SPass);
+            Statement st = con.createStatement();
+            
+            if("".equals(FullnameFld.getText())){
                 JOptionPane.showMessageDialog(this, "Please enter your full name.", "Missing Information", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-            else if (EmailFld.getText().trim().isEmpty()){
+            }else if ("".equals(EmailFld.getText())){
                 JOptionPane.showMessageDialog(this, "Please enter your email", "Missing Information", JOptionPane.WARNING_MESSAGE);
                 return;
-            }
-            else if (PasswordFld.getText().trim().isEmpty()){
+            }else if ("".equals(PasswordFld.getText())){
                 JOptionPane.showMessageDialog(this, "Please enter your Password", "Missing Information", JOptionPane.WARNING_MESSAGE);
                 return;
-            }
-            else{
-                JOptionPane.showMessageDialog(this, "Sign-up successful!", "Sign-Up", JOptionPane.INFORMATION_MESSAGE);
-                return;
+            }else{
+                Fullname = FullnameFld.getText();
+                Email = EmailFld.getText();
+                Password = PasswordFld.getText();
+                query = "INSERT INTO user(full_name, email, password)" +
+                        "VALUES('"+Fullname+"' , '"+Email+"' , '"+Password+"')";
+                
+                st.execute(query);
+                FullnameFld.setText("");
+                EmailFld.setText("");
+                PasswordFld.setText("");
+                showMessageDialog(null, "Account added Successfully!");
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error"+e.getMessage(), "Error Message", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Error" + e.getMessage(), "Error Message", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_SignUpBtnActionPerformed
 
@@ -242,34 +258,7 @@ public class SignUp extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignUp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new SignUp().setVisible(true);
