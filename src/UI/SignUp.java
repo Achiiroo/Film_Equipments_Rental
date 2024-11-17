@@ -32,13 +32,13 @@ public class SignUp extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         FullnameFld = new javax.swing.JTextField();
         EmailFld = new javax.swing.JTextField();
-        PasswordFld = new javax.swing.JTextField();
         SignUpBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
+        PasswordFld = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 500));
+        setTitle("Create Account");
 
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel1.setLayout(null);
@@ -79,15 +79,6 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
-        PasswordFld.setBackground(new java.awt.Color(255, 255, 255));
-        PasswordFld.setForeground(new java.awt.Color(35, 35, 35));
-        PasswordFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        PasswordFld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PasswordFldActionPerformed(evt);
-            }
-        });
-
         SignUpBtn.setBackground(new java.awt.Color(153, 153, 153));
         SignUpBtn.setForeground(new java.awt.Color(255, 255, 255));
         SignUpBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -113,6 +104,9 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
+        PasswordFld.setBackground(new java.awt.Color(255, 255, 255));
+        PasswordFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -129,17 +123,19 @@ public class SignUp extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jLabel4)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(FullnameFld, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(EmailFld, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PasswordFld, javax.swing.GroupLayout.PREFERRED_SIZE, 320, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(SignUpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(FullnameFld, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                                    .addComponent(EmailFld, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                                    .addGroup(jPanel3Layout.createSequentialGroup()
+                                        .addComponent(SignUpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(17, 17, 17))
+                                    .addComponent(PasswordFld))))))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,11 +156,11 @@ public class SignUp extends javax.swing.JFrame {
                 .addComponent(PasswordFld, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(SignUpBtn)
-                .addGap(26, 26, 26)
+                .addGap(24, 24, 24)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jButton2))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3);
@@ -192,12 +188,8 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailFldActionPerformed
 
-    private void PasswordFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PasswordFldActionPerformed
-
     private void SignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpBtnActionPerformed
-        String Fullname, Email, Password, query;
+        String Fullname, Email, Password, query, Options;
         String SUrl, SUser, SPass;
         SUrl = "jdbc:MySQL://localhost:3306/user_database";
         SUser = "root";
@@ -220,13 +212,15 @@ public class SignUp extends javax.swing.JFrame {
                 Fullname = FullnameFld.getText();
                 Email = EmailFld.getText();
                 Password = PasswordFld.getText();
-                query = "INSERT INTO user(full_name, email, password)" +
-                        "VALUES('"+Fullname+"' , '"+Email+"' , '"+Password+"')";
+                Options = "Customer";
+                query = "INSERT INTO user(full_name, email, password, options)" +
+                        "VALUES('"+Fullname+"' , '"+Email+"' , '"+Password+"' , '"+Options+"')";
                 
                 st.execute(query);
                 FullnameFld.setText("");
                 EmailFld.setText("");
                 PasswordFld.setText("");
+                
                 showMessageDialog(null, "Account added Successfully!");
             }
         } catch (Exception e) {
@@ -253,7 +247,7 @@ public class SignUp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField EmailFld;
     private javax.swing.JTextField FullnameFld;
-    private javax.swing.JTextField PasswordFld;
+    private javax.swing.JPasswordField PasswordFld;
     private javax.swing.JButton SignUpBtn;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
