@@ -4,8 +4,6 @@
  */
 package AdminUI;
 
-import java.awt.Color;
-
 /**
  *
  * @author dave
@@ -17,10 +15,6 @@ public class AdminMainMenu extends javax.swing.JFrame {
      */
     public AdminMainMenu() {
         initComponents();
-        setVisible(true);
-        setLocationRelativeTo(null);
-        this.dispose();
-        
     }
 
     /**
@@ -33,255 +27,43 @@ public class AdminMainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         pnlRoot = new javax.swing.JPanel();
-        pnlCenter = new javax.swing.JPanel();
         pnlSide = new javax.swing.JPanel();
-        addEquipmentBtn1 = new javax.swing.JButton();
-        removeEquipmentBtn1 = new javax.swing.JButton();
-        updateEquipmentBtn1 = new javax.swing.JButton();
-        viewRentalBtn1 = new javax.swing.JButton();
-        viewPaymentHistoryBtn1 = new javax.swing.JButton();
-        backgroundicon = new javax.swing.JPanel();
-        reportsHistoryBtn1 = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jPanel6 = new javax.swing.JPanel();
+        pnlCenter = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Admin");
-        setResizable(false);
+        setPreferredSize(new java.awt.Dimension(800, 500));
 
         pnlRoot.setLayout(new java.awt.BorderLayout());
 
-        pnlCenter.setBackground(new java.awt.Color(40, 40, 44));
-        pnlCenter.setPreferredSize(new java.awt.Dimension(800, 500));
-        pnlCenter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        pnlSide.setBackground(new java.awt.Color(153, 153, 153));
-        pnlSide.setBorder(new javax.swing.border.MatteBorder(null));
+        pnlSide.setBackground(new java.awt.Color(21, 25, 28));
         pnlSide.setPreferredSize(new java.awt.Dimension(100, 500));
-
-        addEquipmentBtn1.setBackground(new java.awt.Color(153, 153, 153));
-        addEquipmentBtn1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        addEquipmentBtn1.setText("Add Equipment");
-        addEquipmentBtn1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        addEquipmentBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                addEquipmentBtn1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                addEquipmentBtn1MouseExited(evt);
-            }
-        });
-        addEquipmentBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addEquipmentBtn1ActionPerformed(evt);
-            }
-        });
-
-        removeEquipmentBtn1.setBackground(new java.awt.Color(153, 153, 153));
-        removeEquipmentBtn1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        removeEquipmentBtn1.setText("Remove Equipment");
-        removeEquipmentBtn1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        removeEquipmentBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                removeEquipmentBtn1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                removeEquipmentBtn1MouseExited(evt);
-            }
-        });
-        removeEquipmentBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeEquipmentBtn1ActionPerformed(evt);
-            }
-        });
-
-        updateEquipmentBtn1.setBackground(new java.awt.Color(153, 153, 153));
-        updateEquipmentBtn1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        updateEquipmentBtn1.setText("Update Equipment");
-        updateEquipmentBtn1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        updateEquipmentBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                updateEquipmentBtn1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                updateEquipmentBtn1MouseExited(evt);
-            }
-        });
-        updateEquipmentBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateEquipmentBtn1ActionPerformed(evt);
-            }
-        });
-
-        viewRentalBtn1.setBackground(new java.awt.Color(153, 153, 153));
-        viewRentalBtn1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        viewRentalBtn1.setText("View Rental");
-        viewRentalBtn1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        viewRentalBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                viewRentalBtn1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                viewRentalBtn1MouseExited(evt);
-            }
-        });
-        viewRentalBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewRentalBtn1ActionPerformed(evt);
-            }
-        });
-
-        viewPaymentHistoryBtn1.setBackground(new java.awt.Color(153, 153, 153));
-        viewPaymentHistoryBtn1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        viewPaymentHistoryBtn1.setText("View Payment History");
-        viewPaymentHistoryBtn1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        viewPaymentHistoryBtn1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                viewPaymentHistoryBtn1MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                viewPaymentHistoryBtn1MouseExited(evt);
-            }
-        });
-        viewPaymentHistoryBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewPaymentHistoryBtn1ActionPerformed(evt);
-            }
-        });
-
-        backgroundicon.setBackground(new java.awt.Color(38, 37, 37));
-
-        javax.swing.GroupLayout backgroundiconLayout = new javax.swing.GroupLayout(backgroundicon);
-        backgroundicon.setLayout(backgroundiconLayout);
-        backgroundiconLayout.setHorizontalGroup(
-            backgroundiconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 187, Short.MAX_VALUE)
-        );
-        backgroundiconLayout.setVerticalGroup(
-            backgroundiconLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        reportsHistoryBtn1.setBackground(new java.awt.Color(153, 153, 153));
-        reportsHistoryBtn1.setFont(new java.awt.Font("Segoe UI Black", 1, 14)); // NOI18N
-        reportsHistoryBtn1.setText("Reports History");
-        reportsHistoryBtn1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        reportsHistoryBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                reportsHistoryBtn1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout pnlSideLayout = new javax.swing.GroupLayout(pnlSide);
         pnlSide.setLayout(pnlSideLayout);
         pnlSideLayout.setHorizontalGroup(
             pnlSideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(reportsHistoryBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(viewRentalBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(updateEquipmentBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(removeEquipmentBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(backgroundicon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(addEquipmentBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(viewPaymentHistoryBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
         pnlSideLayout.setVerticalGroup(
             pnlSideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlSideLayout.createSequentialGroup()
-                .addComponent(backgroundicon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(addEquipmentBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(removeEquipmentBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(updateEquipmentBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(viewRentalBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(viewPaymentHistoryBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(reportsHistoryBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-                .addGap(17, 17, 17))
+            .addGap(0, 398, Short.MAX_VALUE)
         );
 
-        pnlCenter.add(pnlSide, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 171, 189, 329));
+        pnlRoot.add(pnlSide, java.awt.BorderLayout.WEST);
 
-        jPanel2.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        pnlCenter.setBackground(new java.awt.Color(30, 40, 44));
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 2, 13)); // NOI18N
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/user-circle-regular-36.png"))); // NOI18N
-        jLabel2.setText("Welcome, Admin!");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 170, 40));
-
-        pnlCenter.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 0, 610, 60));
-
-        jPanel3.setLayout(null);
-        pnlCenter.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(538, 330, -1, -1));
-
-        jLabel9.setBackground(new java.awt.Color(102, 102, 102));
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Mary Jhezl\\Downloads\\BRB 1.png")); // NOI18N
-        jLabel9.setMaximumSize(new java.awt.Dimension(100, 100));
-        jLabel9.setMinimumSize(new java.awt.Dimension(100, 100));
-        jLabel9.setPreferredSize(new java.awt.Dimension(100, 100));
-        pnlCenter.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 189, 165));
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
+        javax.swing.GroupLayout pnlCenterLayout = new javax.swing.GroupLayout(pnlCenter);
+        pnlCenter.setLayout(pnlCenterLayout);
+        pnlCenterLayout.setHorizontalGroup(
+            pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
+        pnlCenterLayout.setVerticalGroup(
+            pnlCenterLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 398, Short.MAX_VALUE)
         );
-
-        pnlCenter.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 100, -1, -1));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-
-        pnlCenter.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 100, -1, -1));
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-
-        pnlCenter.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, -1, -1));
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 220, Short.MAX_VALUE)
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 160, Short.MAX_VALUE)
-        );
-
-        pnlCenter.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 290, -1, -1));
 
         pnlRoot.add(pnlCenter, java.awt.BorderLayout.CENTER);
 
@@ -289,104 +71,6 @@ public class AdminMainMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void removeEquipmentBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeEquipmentBtn1ActionPerformed
-        RemoveEquipment remove = new RemoveEquipment();
-        remove.setVisible(true);
-        remove.pack();
-        remove.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_removeEquipmentBtn1ActionPerformed
-
-    private void updateEquipmentBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateEquipmentBtn1ActionPerformed
-        UpdateEquipment update = new UpdateEquipment();
-        update.setVisible(true);
-        update.pack();
-        update.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_updateEquipmentBtn1ActionPerformed
-
-    private void reportsHistoryBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportsHistoryBtn1ActionPerformed
-        ReportsHistory report = new ReportsHistory();
-        report.setVisible(true);
-        report.pack();
-        report.setLocationRelativeTo(null);
-        this.dispose();    }//GEN-LAST:event_reportsHistoryBtn1ActionPerformed
-
-    private void viewRentalBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewRentalBtn1ActionPerformed
-        ViewRental rent = new ViewRental();
-        rent.setVisible(true);
-        rent.pack();
-        rent.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_viewRentalBtn1ActionPerformed
-
-    private void viewPaymentHistoryBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewPaymentHistoryBtn1ActionPerformed
-        ViewPaymentHistory pay = new ViewPaymentHistory();
-        pay.setVisible(true);
-        pay.pack();
-        pay.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_viewPaymentHistoryBtn1ActionPerformed
-
-    private void addEquipmentBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addEquipmentBtn1ActionPerformed
-        AddEquipment adeq = new AddEquipment();
-        adeq.setVisible(true);
-        adeq.pack();
-        adeq.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_addEquipmentBtn1ActionPerformed
-
-    private void addEquipmentBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addEquipmentBtn1MouseExited
-        addEquipmentBtn1.setBackground(new Color(153,153,153));
-        addEquipmentBtn1.setForeground(Color.BLACK);
-    }//GEN-LAST:event_addEquipmentBtn1MouseExited
-
-    private void addEquipmentBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addEquipmentBtn1MouseEntered
-        addEquipmentBtn1.setBackground(Color.blue);
-        addEquipmentBtn1.setForeground(new Color(225,225,225));
-    }//GEN-LAST:event_addEquipmentBtn1MouseEntered
-
-    private void removeEquipmentBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeEquipmentBtn1MouseEntered
-        removeEquipmentBtn1.setBackground(Color.blue);
-        removeEquipmentBtn1.setForeground(new Color(225,225,225));
-    }//GEN-LAST:event_removeEquipmentBtn1MouseEntered
-
-    private void removeEquipmentBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeEquipmentBtn1MouseExited
-        removeEquipmentBtn1.setBackground(new Color(153,153,153));
-        removeEquipmentBtn1.setForeground(Color.BLACK);
-    }//GEN-LAST:event_removeEquipmentBtn1MouseExited
-
-    private void updateEquipmentBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateEquipmentBtn1MouseEntered
-        updateEquipmentBtn1.setBackground(Color.blue);
-        updateEquipmentBtn1.setForeground(new Color(225,225,225));
-    }//GEN-LAST:event_updateEquipmentBtn1MouseEntered
-
-    private void updateEquipmentBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_updateEquipmentBtn1MouseExited
-        updateEquipmentBtn1.setBackground(new Color(153,153,153));
-        updateEquipmentBtn1.setForeground(Color.BLACK);
-    }//GEN-LAST:event_updateEquipmentBtn1MouseExited
-
-    private void viewRentalBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewRentalBtn1MouseEntered
-        viewRentalBtn1.setBackground(Color.blue);
-        viewRentalBtn1.setForeground(new Color(225,225,225));
-    }//GEN-LAST:event_viewRentalBtn1MouseEntered
-
-    private void viewRentalBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewRentalBtn1MouseExited
-        viewRentalBtn1.setBackground(new Color(153,153,153));
-        viewRentalBtn1.setForeground(Color.BLACK);
-    }//GEN-LAST:event_viewRentalBtn1MouseExited
-
-    private void viewPaymentHistoryBtn1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewPaymentHistoryBtn1MouseEntered
-        viewPaymentHistoryBtn1.setBackground(Color.blue);
-        viewPaymentHistoryBtn1.setForeground(new Color(225,225,225));
-    }//GEN-LAST:event_viewPaymentHistoryBtn1MouseEntered
-
-    private void viewPaymentHistoryBtn1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_viewPaymentHistoryBtn1MouseExited
-        viewPaymentHistoryBtn1.setBackground(new Color(153,153,153));
-        viewPaymentHistoryBtn1.setForeground(Color.BLACK);
-    }//GEN-LAST:event_viewPaymentHistoryBtn1MouseExited
-    
 
     /**
      * @param args the command line arguments
@@ -424,23 +108,8 @@ public class AdminMainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addEquipmentBtn1;
-    private javax.swing.JPanel backgroundicon;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel pnlCenter;
     private javax.swing.JPanel pnlRoot;
     private javax.swing.JPanel pnlSide;
-    private javax.swing.JButton removeEquipmentBtn1;
-    private javax.swing.JButton reportsHistoryBtn1;
-    private javax.swing.JButton updateEquipmentBtn1;
-    private javax.swing.JButton viewPaymentHistoryBtn1;
-    private javax.swing.JButton viewRentalBtn1;
     // End of variables declaration//GEN-END:variables
 }
