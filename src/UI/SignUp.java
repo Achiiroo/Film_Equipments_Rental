@@ -36,6 +36,7 @@ public class SignUp extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         PasswordFld = new javax.swing.JPasswordField();
+        OptionsCmbBx = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create Account");
@@ -107,6 +108,14 @@ public class SignUp extends javax.swing.JFrame {
         PasswordFld.setBackground(new java.awt.Color(255, 255, 255));
         PasswordFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        OptionsCmbBx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Admin", "Customer" }));
+        OptionsCmbBx.setPreferredSize(new java.awt.Dimension(120, 20));
+        OptionsCmbBx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OptionsCmbBxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -133,7 +142,8 @@ public class SignUp extends javax.swing.JFrame {
                                     .addComponent(EmailFld, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
                                     .addGroup(jPanel3Layout.createSequentialGroup()
                                         .addComponent(SignUpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(17, 17, 17))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(OptionsCmbBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(PasswordFld))))))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
@@ -155,12 +165,14 @@ public class SignUp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PasswordFld, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(SignUpBtn)
-                .addGap(24, 24, 24)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(SignUpBtn)
+                    .addComponent(OptionsCmbBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jButton2))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3);
@@ -191,13 +203,10 @@ public class SignUp extends javax.swing.JFrame {
     private void SignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpBtnActionPerformed
         String Fullname, Email, Password, query, Options;
         String SUrl, SUser, SPass;
-        SUrl = "jdbc:MySQL://localhost:3306/user_database";
-        SUser = "root";
-        SPass = "";
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection(SUrl, SUser, SPass);
+            Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/fers", "root", "");
             Statement st = con.createStatement();
             
             if("".equals(FullnameFld.getText())){
@@ -212,14 +221,15 @@ public class SignUp extends javax.swing.JFrame {
                 Fullname = FullnameFld.getText();
                 Email = EmailFld.getText();
                 Password = PasswordFld.getText();
-                Options = "Customer";
-                query = "INSERT INTO user(full_name, email, password, options)" +
+                Options = (String) OptionsCmbBx.getSelectedItem();
+                query = "INSERT INTO fers_users(full_name, email, password, user_type)" +
                         "VALUES('"+Fullname+"' , '"+Email+"' , '"+Password+"' , '"+Options+"')";
                 
                 st.execute(query);
                 FullnameFld.setText("");
                 EmailFld.setText("");
                 PasswordFld.setText("");
+                OptionsCmbBx.setSelectedItem(0);
                 
                 showMessageDialog(null, "Account added Successfully!");
             }
@@ -236,6 +246,10 @@ public class SignUp extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void OptionsCmbBxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OptionsCmbBxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_OptionsCmbBxActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -247,6 +261,7 @@ public class SignUp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField EmailFld;
     private javax.swing.JTextField FullnameFld;
+    private javax.swing.JComboBox<String> OptionsCmbBx;
     private javax.swing.JPasswordField PasswordFld;
     private javax.swing.JButton SignUpBtn;
     private javax.swing.JButton jButton2;

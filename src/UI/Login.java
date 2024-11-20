@@ -5,6 +5,7 @@
 package UI;
 
 import AdminUI.AdminMainMenu;
+import CustomerUI.CustomerMainMenu;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -181,14 +182,16 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_PasswordFldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String Email, Password, query, passDb = null;
+        String EmailOrUserName, Password, query;
+        String passDb = null, userType = null;
         String SUrl, SUser, SPass;
         
         int notFound = 0;
+        int passMatch = 0;
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/user_database", "root", "");
+            Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/fers", "root", "");
             Statement st = con.createStatement();
             
             if("".equals(PasswordFld.getText()) && "".equals(EmailFld.getText())){
@@ -202,23 +205,42 @@ public class Login extends javax.swing.JFrame {
                 return;
             }
             else{
-                Email = EmailFld.getText();
+                EmailOrUserName = EmailFld.getText();
                 Password = PasswordFld.getText();
-                query = "SELECT * FROM user WHERE email= '"+Email+"'";
+                query = "SELECT * FROM fers_users WHERE email= '"+EmailOrUserName+"' OR full_name= '"+EmailOrUserName+"'";
                 ResultSet rs = st.executeQuery(query);
                 
                 while(rs.next()){
                     passDb = rs.getString("password");
+                    userType = rs.getString("user_type");
                     notFound = 1;
+                    if(Password.equals(passDb)){
+                        passMatch = 1;
+                    }
                 }
-                if(notFound == 1 && Password.equals(passDb)){
-                    AdminMainMenu amM = new AdminMainMenu();
-                    amM.setVisible(true);
-                    amM.pack();
-                    amM.setLocationRelativeTo(null);
+                if(notFound == 1 && passMatch == 1){
+                    if("Admin".equalsIgnoreCase(userType)){
+                        AdminMainMenu amM = new AdminMainMenu();
+                        amM.setVisible(true);
+                        amM.pack();
+                        amM.setLocationRelativeTo(null);
+                        this.dispose();
+                    }else if("Customer".equalsIgnoreCase(userType)){
+                        CustomerMainMenu cmM = new CustomerMainMenu();
+                        cmM.setVisible(true);
+                        cmM.pack();
+                        cmM.setLocationRelativeTo(null);
+                        this.dispose();
+                    }else{
+                        JOptionPane.showMessageDialog(this, "User type not recognized", "Error", JOptionPane.WARNING_MESSAGE);
+                    }
                     this.dispose();
+                }else if(notFound == 1){
+                    JOptionPane.showMessageDialog(this, "Incorrect Password", "Error", JOptionPane.WARNING_MESSAGE);
+                }else if(passMatch == 1){
+                    JOptionPane.showMessageDialog(this, "Incorrect Email/username", "Error", JOptionPane.WARNING_MESSAGE);
                 }else{
-                    JOptionPane.showMessageDialog(new JFrame(), "Incorrect Password", "Error", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Incorrect Email/username & Password", "Error", JOptionPane.WARNING_MESSAGE);
                 }
                 
                 st.execute(query);
