@@ -5,7 +5,7 @@
 package UI;
 
 import AdminUI.AdminMainMenu;
-import CustomerUI.CustomerMainMenu;
+import CustomerUI.CustomerMain;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -226,7 +226,7 @@ public class Login extends javax.swing.JFrame {
                         amM.setLocationRelativeTo(null);
                         this.dispose();
                     }else if("Customer".equalsIgnoreCase(userType)){
-                        CustomerMainMenu cmM = new CustomerMainMenu();
+                        CustomerMain cmM = new CustomerMain();
                         cmM.setVisible(true);
                         cmM.pack();
                         cmM.setLocationRelativeTo(null);

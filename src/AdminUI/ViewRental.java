@@ -45,7 +45,6 @@ public class ViewRental extends javax.swing.JFrame {
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 0, 660, 50));
 
         jLabel9.setBackground(new java.awt.Color(30, 40, 44));
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Mary Jhezl\\Downloads\\EQUIPMENTS RENTAL (100 x 100 px) (140 x 140 px) (2).png")); // NOI18N
         jLabel9.setMaximumSize(new java.awt.Dimension(100, 100));
         jLabel9.setMinimumSize(new java.awt.Dimension(100, 100));
         jLabel9.setPreferredSize(new java.awt.Dimension(100, 100));

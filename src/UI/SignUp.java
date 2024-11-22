@@ -24,6 +24,7 @@ public class SignUp extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jTextField1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -31,12 +32,18 @@ public class SignUp extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         FullnameFld = new javax.swing.JTextField();
-        EmailFld = new javax.swing.JTextField();
+        AddressFld = new javax.swing.JTextField();
         SignUpBtn = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        PasswordFld = new javax.swing.JPasswordField();
         OptionsCmbBx = new javax.swing.JComboBox<>();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        PasswordFld = new javax.swing.JPasswordField();
+        EmailFld = new javax.swing.JTextField();
+        PhoneNumberFld = new javax.swing.JTextField();
+
+        jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create Account");
@@ -60,7 +67,7 @@ public class SignUp extends javax.swing.JFrame {
         jLabel3.setText("Email:");
 
         jLabel4.setForeground(new java.awt.Color(30, 30, 30));
-        jLabel4.setText("Password:");
+        jLabel4.setText("PhoneNumber:");
 
         FullnameFld.setBackground(new java.awt.Color(255, 255, 255));
         FullnameFld.setForeground(new java.awt.Color(35, 35, 35));
@@ -71,18 +78,18 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
-        EmailFld.setBackground(new java.awt.Color(255, 255, 255));
-        EmailFld.setForeground(new java.awt.Color(35, 35, 35));
-        EmailFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        EmailFld.addActionListener(new java.awt.event.ActionListener() {
+        AddressFld.setBackground(new java.awt.Color(255, 255, 255));
+        AddressFld.setForeground(new java.awt.Color(35, 35, 35));
+        AddressFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        AddressFld.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                EmailFldActionPerformed(evt);
+                AddressFldActionPerformed(evt);
             }
         });
 
         SignUpBtn.setBackground(new java.awt.Color(153, 153, 153));
         SignUpBtn.setForeground(new java.awt.Color(255, 255, 255));
-        SignUpBtn.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        SignUpBtn.setBorder(javax.swing.BorderFactory.createEtchedBorder(java.awt.Color.white, null));
         SignUpBtn.setLabel("SignUp");
         SignUpBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,14 +112,43 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
 
-        PasswordFld.setBackground(new java.awt.Color(255, 255, 255));
-        PasswordFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-
         OptionsCmbBx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Admin", "Customer" }));
         OptionsCmbBx.setPreferredSize(new java.awt.Dimension(120, 20));
         OptionsCmbBx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 OptionsCmbBxActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setForeground(new java.awt.Color(30, 30, 30));
+        jLabel6.setText("Address:");
+
+        jLabel7.setForeground(new java.awt.Color(30, 30, 30));
+        jLabel7.setText("Password:");
+
+        PasswordFld.setBackground(new java.awt.Color(255, 255, 255));
+        PasswordFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PasswordFld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PasswordFldActionPerformed(evt);
+            }
+        });
+
+        EmailFld.setBackground(new java.awt.Color(255, 255, 255));
+        EmailFld.setForeground(new java.awt.Color(35, 35, 35));
+        EmailFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        EmailFld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EmailFldActionPerformed(evt);
+            }
+        });
+
+        PhoneNumberFld.setBackground(new java.awt.Color(255, 255, 255));
+        PhoneNumberFld.setForeground(new java.awt.Color(35, 35, 35));
+        PhoneNumberFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        PhoneNumberFld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PhoneNumberFldActionPerformed(evt);
             }
         });
 
@@ -135,36 +171,46 @@ public class SignUp extends javax.swing.JFrame {
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(FullnameFld, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                                    .addComponent(EmailFld, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-                                    .addGroup(jPanel3Layout.createSequentialGroup()
-                                        .addComponent(SignUpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(OptionsCmbBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(PasswordFld))))))
-                .addContainerGap(89, Short.MAX_VALUE))
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(FullnameFld, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                                .addComponent(AddressFld, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addComponent(SignUpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(OptionsCmbBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jLabel7)
+                                .addComponent(PasswordFld))
+                            .addComponent(jLabel6)
+                            .addComponent(EmailFld, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
+                            .addComponent(PhoneNumberFld, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE))))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(56, 56, 56)
-                .addComponent(jLabel1)
                 .addGap(32, 32, 32)
+                .addComponent(jLabel1)
+                .addGap(27, 27, 27)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(FullnameFld, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(4, 4, 4)
                 .addComponent(EmailFld, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PhoneNumberFld, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(AddressFld, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(PasswordFld, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(SignUpBtn)
                     .addComponent(OptionsCmbBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -172,7 +218,7 @@ public class SignUp extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jButton2))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel3);
@@ -196,12 +242,13 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_FullnameFldActionPerformed
 
-    private void EmailFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailFldActionPerformed
+    private void AddressFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddressFldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_EmailFldActionPerformed
+    }//GEN-LAST:event_AddressFldActionPerformed
 
     private void SignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpBtnActionPerformed
-        String Fullname, Email, Password, query, Options;
+        String Fullname, Email, Password, Phone, Address;
+        String query, Options;
         String SUrl, SUser, SPass;
         
         try {
@@ -217,18 +264,29 @@ public class SignUp extends javax.swing.JFrame {
             }else if ("".equals(PasswordFld.getText())){
                 JOptionPane.showMessageDialog(this, "Please enter your Password", "Missing Information", JOptionPane.WARNING_MESSAGE);
                 return;
-            }else{
+            }else if("".equals(AddressFld.getText())){
+                JOptionPane.showMessageDialog(this, "Please enter your Address", "Missing Information", JOptionPane.WARNING_MESSAGE);
+                return;
+            }else if("".equals(PhoneNumberFld.getText())){
+                JOptionPane.showMessageDialog(this, "Please enter your Phone Number", "Missing Information", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            else{
                 Fullname = FullnameFld.getText();
                 Email = EmailFld.getText();
                 Password = PasswordFld.getText();
+                Phone = PhoneNumberFld.getText();
+                Address = AddressFld.getText();
                 Options = (String) OptionsCmbBx.getSelectedItem();
-                query = "INSERT INTO fers_users(full_name, email, password, user_type)" +
-                        "VALUES('"+Fullname+"' , '"+Email+"' , '"+Password+"' , '"+Options+"')";
+                query = "INSERT INTO fers_users(full_name, email, password, user_type, address, phone_number)" +
+                        "VALUES('"+Fullname+"' , '"+Email+"' , '"+Password+"' , '"+Options+"' , '"+Address+"' , '"+Phone+"')";
                 
                 st.execute(query);
                 FullnameFld.setText("");
                 EmailFld.setText("");
                 PasswordFld.setText("");
+                PhoneNumberFld.setText("");
+                AddressFld.setText("");
                 OptionsCmbBx.setSelectedItem(0);
                 
                 showMessageDialog(null, "Account added Successfully!");
@@ -250,6 +308,18 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_OptionsCmbBxActionPerformed
 
+    private void PasswordFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordFldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PasswordFldActionPerformed
+
+    private void EmailFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmailFldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EmailFldActionPerformed
+
+    private void PhoneNumberFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneNumberFldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PhoneNumberFldActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -259,10 +329,12 @@ public class SignUp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField AddressFld;
     private javax.swing.JTextField EmailFld;
     private javax.swing.JTextField FullnameFld;
     private javax.swing.JComboBox<String> OptionsCmbBx;
     private javax.swing.JPasswordField PasswordFld;
+    private javax.swing.JTextField PhoneNumberFld;
     private javax.swing.JButton SignUpBtn;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
@@ -270,7 +342,10 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

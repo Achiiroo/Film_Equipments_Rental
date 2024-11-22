@@ -1,15 +1,12 @@
 package AdminUI;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import static javax.swing.JOptionPane.showMessageDialog;
 
-
-/**
- *
- * @author Mary Jhezl
- */
 public class AddEquipment extends javax.swing.JFrame {
 
     /**
@@ -32,162 +29,187 @@ public class AddEquipment extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jTextField4 = new javax.swing.JTextField();
-        pnlCenter = new javax.swing.JPanel();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        txtAddEquipment = new javax.swing.JLabel();
-        equipmentName = new javax.swing.JTextField();
-        txtequipmentName = new javax.swing.JLabel();
-        txtequipmentType = new javax.swing.JLabel();
-        equipmentType = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        description = new javax.swing.JTextField();
-        txtrentPrice = new javax.swing.JLabel();
-        rentPrice = new javax.swing.JTextField();
-        txtAvailability = new javax.swing.JLabel();
-        availability = new javax.swing.JTextField();
-        saveBtn = new javax.swing.JButton();
-        backBtn = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        CategoryLbl = new javax.swing.JTextField();
+        EquipmentNameLbl = new javax.swing.JTextField();
+        BrandLbl = new javax.swing.JTextField();
+        ModelNumLbl = new javax.swing.JTextField();
+        CanelBtn = new javax.swing.JButton();
+        addBtn = new javax.swing.JButton();
+        Addtxt = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(800, 500));
+        setPreferredSize(new java.awt.Dimension(500, 400));
         setResizable(false);
 
-        jPanel1.setBackground(new java.awt.Color(112, 122, 126));
-        jPanel1.setPreferredSize(new java.awt.Dimension(800, 500));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 509, 223, -1));
+        jPanel1.setBackground(new java.awt.Color(21, 25, 28));
+        jPanel1.setPreferredSize(new java.awt.Dimension(500, 400));
+        jPanel1.setLayout(null);
 
-        pnlCenter.setBackground(new java.awt.Color(40, 40, 44));
-        pnlCenter.setPreferredSize(new java.awt.Dimension(800, 500));
-        pnlCenter.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel5.setPreferredSize(new java.awt.Dimension(700, 300));
+        jPanel5.setLayout(null);
 
-        jPanel3.setBackground(new java.awt.Color(153, 153, 153));
-        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        pnlCenter.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(143, 0, 660, 50));
+        jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        jLabel1.setText("Category:");
 
-        jLabel9.setBackground(new java.awt.Color(30, 40, 44));
-        jLabel9.setIcon(new javax.swing.ImageIcon("C:\\Users\\Mary Jhezl\\Downloads\\EQUIPMENTS RENTAL (100 x 100 px) (140 x 140 px) (2).png")); // NOI18N
-        jLabel9.setMaximumSize(new java.awt.Dimension(100, 100));
-        jLabel9.setMinimumSize(new java.awt.Dimension(100, 100));
-        jLabel9.setPreferredSize(new java.awt.Dimension(100, 100));
-        pnlCenter.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 110));
+        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        jLabel2.setText("Equipment Name:");
 
-        jPanel4.setLayout(null);
-        pnlCenter.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(538, 389, -1, -1));
+        jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        jLabel3.setText("Brand:");
 
-        txtAddEquipment.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
-        txtAddEquipment.setForeground(new java.awt.Color(255, 255, 255));
-        txtAddEquipment.setText("ADD EQUIPMENT");
-        pnlCenter.add(txtAddEquipment, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 70, 170, -1));
+        jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
+        jLabel4.setText("Model Number:");
 
-        equipmentName.addActionListener(new java.awt.event.ActionListener() {
+        CategoryLbl.setBackground(new java.awt.Color(255, 255, 255));
+
+        EquipmentNameLbl.setBackground(new java.awt.Color(255, 255, 255));
+
+        BrandLbl.setBackground(new java.awt.Color(255, 255, 255));
+
+        ModelNumLbl.setBackground(new java.awt.Color(255, 255, 255));
+
+        CanelBtn.setText("Cancel");
+        CanelBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                equipmentNameActionPerformed(evt);
+                CanelBtnActionPerformed(evt);
             }
         });
-        pnlCenter.add(equipmentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 120, 390, -1));
 
-        txtequipmentName.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        txtequipmentName.setForeground(new java.awt.Color(255, 255, 255));
-        txtequipmentName.setText("Equipment Name :");
-        pnlCenter.add(txtequipmentName, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 120, -1, -1));
-
-        txtequipmentType.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        txtequipmentType.setForeground(new java.awt.Color(255, 255, 255));
-        txtequipmentType.setText("Equipment Type :");
-        pnlCenter.add(txtequipmentType, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, -1, -1));
-        pnlCenter.add(equipmentType, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 390, -1));
-
-        jLabel5.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Description :");
-        pnlCenter.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 220, -1, -1));
-
-        description.addActionListener(new java.awt.event.ActionListener() {
+        addBtn.setText("Add");
+        addBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                descriptionActionPerformed(evt);
+                addBtnActionPerformed(evt);
             }
         });
-        pnlCenter.add(description, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 220, 390, 50));
 
-        txtrentPrice.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        txtrentPrice.setForeground(new java.awt.Color(255, 255, 255));
-        txtrentPrice.setText("Rent Price :");
-        pnlCenter.add(txtrentPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 290, -1, 28));
-        pnlCenter.add(rentPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 290, 390, -1));
-
-        txtAvailability.setFont(new java.awt.Font("Segoe UI Historic", 1, 14)); // NOI18N
-        txtAvailability.setForeground(new java.awt.Color(255, 255, 255));
-        txtAvailability.setText("Availability :");
-        pnlCenter.add(txtAvailability, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 340, 90, 28));
-        pnlCenter.add(availability, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 340, 390, -1));
-
-        saveBtn.setText("Save");
-        saveBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveBtnActionPerformed(evt);
-            }
-        });
-        pnlCenter.add(saveBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 410, -1, -1));
-
-        backBtn.setText("Back");
-        backBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                backBtnMouseEntered(evt);
-            }
-        });
-        backBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backBtnActionPerformed(evt);
-            }
-        });
-        pnlCenter.add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 410, -1, -1));
-
-        jPanel1.add(pnlCenter, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addBtn)
+                        .addGap(55, 55, 55)
+                        .addComponent(CanelBtn))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                        .addGap(62, 62, 62)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ModelNumLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BrandLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CategoryLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EquipmentNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 501, javax.swing.GroupLayout.PREFERRED_SIZE))
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(CategoryLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(EquipmentNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(BrandLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(ModelNumLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addBtn)
+                    .addComponent(CanelBtn))
+                .addContainerGap(102, Short.MAX_VALUE))
         );
+
+        jPanel5.add(jPanel2);
+        jPanel2.setBounds(0, 10, 500, 340);
+
+        jPanel1.add(jPanel5);
+        jPanel5.setBounds(0, 50, 500, 350);
+
+        Addtxt.setBackground(new java.awt.Color(255, 255, 255));
+        Addtxt.setFont(new java.awt.Font("Helvetica", 0, 24)); // NOI18N
+        Addtxt.setForeground(new java.awt.Color(255, 255, 255));
+        Addtxt.setText("ADD EQUIPMENT");
+        jPanel1.add(Addtxt);
+        Addtxt.setBounds(140, 0, 210, 50);
+
+        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void equipmentNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_equipmentNameActionPerformed
+    private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
+        String Category, EquipmentName, Brand, Model, Availability;
+        String query;
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/fers", "root", "");
+            Statement st = con.createStatement();
+            
+            if("".equals(CategoryLbl.getText())){
+                JOptionPane.showMessageDialog(this, "Missing Category.", "Missing Information", JOptionPane.WARNING_MESSAGE);
+                return;
+            }else if("".equals(EquipmentNameLbl.getText())){
+                JOptionPane.showMessageDialog(this, "Please Enter Equipment Name.", "Missing Information", JOptionPane.WARNING_MESSAGE);
+                return;
+            }else if("".equals(BrandLbl.getText())){
+                JOptionPane.showMessageDialog(this, "Please Enter Brand.", "Missing Information", JOptionPane.WARNING_MESSAGE);
+                return;
+            }else if("".equals(ModelNumLbl.getText())){
+                JOptionPane.showMessageDialog(this, "Please Enter Model.", "Missing Information", JOptionPane.WARNING_MESSAGE);
+                return;
+            }else{
+                Category = CategoryLbl.getText();
+                EquipmentName = EquipmentNameLbl.getText();
+                Brand = BrandLbl.getText();
+                Model = ModelNumLbl.getText();
+                Availability = "";
+                
+                query = "INSERT INTO rental_equipments(Category, Equipment_Name, Brand, Model_Number, Availability)" +
+                        "VALUES('"+Category+"'' , '"+EquipmentName+"' , '"+Brand+"' , '"+Model+"' , '"+Availability+"')";
+                
+                st.execute(query);
+                CategoryLbl.setText("");
+                EquipmentNameLbl.setText("");
+                BrandLbl.setText("");
+                ModelNumLbl.setText("");
+                
+                showMessageDialog(null, "Equipment added Successfully!");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error" + e.getMessage(), "Error Message", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_addBtnActionPerformed
 
-    }//GEN-LAST:event_equipmentNameActionPerformed
-
-    private void descriptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descriptionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_descriptionActionPerformed
-
-    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
-
-    }//GEN-LAST:event_saveBtnActionPerformed
-
-    private void backBtnMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backBtnMouseEntered
-
-    }//GEN-LAST:event_backBtnMouseEntered
-
-    private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
-        AdminMainMenu AdMain = new AdminMainMenu();
-        AdMain.pack();
-        AdMain.setVisible(true);
+    private void CanelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CanelBtnActionPerformed
+        AdminMainMenu AmM = new AdminMainMenu();
+        AmM.setVisible(true);
+        AmM.pack();
+        AmM.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_backBtnActionPerformed
+    }//GEN-LAST:event_CanelBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,24 +250,19 @@ public class AddEquipment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField availability;
-    private javax.swing.JButton backBtn;
-    private javax.swing.JTextField description;
-    private javax.swing.JTextField equipmentName;
-    private javax.swing.JTextField equipmentType;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel Addtxt;
+    private javax.swing.JTextField BrandLbl;
+    private javax.swing.JButton CanelBtn;
+    private javax.swing.JTextField CategoryLbl;
+    private javax.swing.JTextField EquipmentNameLbl;
+    private javax.swing.JTextField ModelNumLbl;
+    private javax.swing.JButton addBtn;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JPanel pnlCenter;
-    private javax.swing.JTextField rentPrice;
-    private javax.swing.JButton saveBtn;
-    private javax.swing.JLabel txtAddEquipment;
-    private javax.swing.JLabel txtAvailability;
-    private javax.swing.JLabel txtequipmentName;
-    private javax.swing.JLabel txtequipmentType;
-    private javax.swing.JLabel txtrentPrice;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }
