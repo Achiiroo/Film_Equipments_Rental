@@ -199,7 +199,7 @@ public class AdminMainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
-        Login MainMenu = new Login();
+         Login MainMenu = new Login();
         MainMenu.setVisible(true);
         MainMenu.pack();
         MainMenu.setLocationRelativeTo(null);

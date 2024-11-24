@@ -278,18 +278,29 @@ public class SignUp extends javax.swing.JFrame {
                 Phone = PhoneNumberFld.getText();
                 Address = AddressFld.getText();
                 Options = (String) OptionsCmbBx.getSelectedItem();
-                query = "INSERT INTO fers_users(full_name, email, password, user_type, address, phone_number)" +
-                        "VALUES('"+Fullname+"' , '"+Email+"' , '"+Password+"' , '"+Options+"' , '"+Address+"' , '"+Phone+"')";
                 
-                st.execute(query);
-                FullnameFld.setText("");
-                EmailFld.setText("");
-                PasswordFld.setText("");
-                PhoneNumberFld.setText("");
-                AddressFld.setText("");
-                OptionsCmbBx.setSelectedItem(0);
+                 int response = JOptionPane.showConfirmDialog(
+                this,
+                "Are you sure you want to sign up with the provided details?",
+                "Confirm Sign-Up",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE
+                );
                 
-                showMessageDialog(null, "Account added Successfully!");
+                if(response ==  JOptionPane.YES_OPTION){
+                    query = "INSERT INTO fers_users(full_name, email, password, user_type, address, phone_number)" +
+                            "VALUES('"+Fullname+"' , '"+Email+"' , '"+Password+"' , '"+Options+"' , '"+Address+"' , '"+Phone+"')";
+
+                    st.execute(query);
+                    FullnameFld.setText("");
+                    EmailFld.setText("");
+                    PasswordFld.setText("");
+                    PhoneNumberFld.setText("");
+                    AddressFld.setText("");
+                    OptionsCmbBx.setSelectedItem(0);
+
+                    showMessageDialog(null, "Account added Successfully!");
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error" + e.getMessage(), "Error Message", JOptionPane.WARNING_MESSAGE);

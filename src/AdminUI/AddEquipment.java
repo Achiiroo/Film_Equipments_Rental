@@ -30,6 +30,9 @@ public class AddEquipment extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -41,10 +44,9 @@ public class AddEquipment extends javax.swing.JFrame {
         ModelNumLbl = new javax.swing.JTextField();
         CanelBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
-        Addtxt = new javax.swing.JLabel();
+        DeleteBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 400));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(21, 25, 28));
@@ -55,17 +57,46 @@ public class AddEquipment extends javax.swing.JFrame {
         jPanel5.setPreferredSize(new java.awt.Dimension(700, 300));
         jPanel5.setLayout(null);
 
+        jPanel3.setBackground(new java.awt.Color(21, 25, 28));
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BRBLogo.png"))); // NOI18N
+
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setText("ADD EQUIPMENT");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addGap(53, 53, 53)
+                .addComponent(jLabel6)
+                .addGap(0, 138, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(35, 35, 35))
+        );
+
+        jPanel5.add(jPanel3);
+        jPanel3.setBounds(0, 0, 500, 100);
+
         jLabel1.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        jLabel1.setText("Category:");
+        jLabel1.setText("Category");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        jLabel2.setText("Equipment Name:");
+        jLabel2.setText("Equipment Name");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        jLabel3.setText("Brand:");
+        jLabel3.setText("Brand");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
-        jLabel4.setText("Model Number:");
+        jLabel4.setText("Model Number");
 
         CategoryLbl.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -89,36 +120,45 @@ public class AddEquipment extends javax.swing.JFrame {
             }
         });
 
+        DeleteBtn.setText("Delete");
+        DeleteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addBtn)
-                        .addGap(55, 55, 55)
-                        .addComponent(CanelBtn))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ModelNumLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(BrandLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CategoryLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EquipmentNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                            .addComponent(EquipmentNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(154, 154, 154)
+                        .addComponent(addBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(DeleteBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(CanelBtn)))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(35, 35, 35)
+                .addGap(122, 122, 122)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(CategoryLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -131,30 +171,24 @@ public class AddEquipment extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(BrandLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel4)
-                    .addComponent(ModelNumLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ModelNumLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(30, 30, 30)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
-                    .addComponent(CanelBtn))
-                .addContainerGap(102, Short.MAX_VALUE))
+                    .addComponent(CanelBtn)
+                    .addComponent(DeleteBtn))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         jPanel5.add(jPanel2);
-        jPanel2.setBounds(0, 10, 500, 340);
+        jPanel2.setBounds(0, 0, 500, 400);
 
         jPanel1.add(jPanel5);
-        jPanel5.setBounds(0, 50, 500, 350);
+        jPanel5.setBounds(0, 0, 500, 400);
 
-        Addtxt.setBackground(new java.awt.Color(255, 255, 255));
-        Addtxt.setFont(new java.awt.Font("Helvetica", 0, 24)); // NOI18N
-        Addtxt.setForeground(new java.awt.Color(255, 255, 255));
-        Addtxt.setText("ADD EQUIPMENT");
-        jPanel1.add(Addtxt);
-        Addtxt.setBounds(140, 0, 210, 50);
-
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_START);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -181,22 +215,40 @@ public class AddEquipment extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Please Enter Model.", "Missing Information", JOptionPane.WARNING_MESSAGE);
                 return;
             }else{
+                //Input Values
                 Category = CategoryLbl.getText();
                 EquipmentName = EquipmentNameLbl.getText();
                 Brand = BrandLbl.getText();
                 Model = ModelNumLbl.getText();
-                Availability = "";
+                Availability = "Available"; //Default Value for availability
                 
-                query = "INSERT INTO rental_equipments(Category, Equipment_Name, Brand, Model_Number, Availability)" +
-                        "VALUES('"+Category+"'' , '"+EquipmentName+"' , '"+Brand+"' , '"+Model+"' , '"+Availability+"')";
+                int response = JOptionPane.showConfirmDialog(
+                this,
+                    "Are you sure you want to add the following equipment?\n" +
+                    "Category: " + Category + "\n" +
+                    "Equipment Name: " + EquipmentName + "\n" +
+                    "Brand: " + Brand + "\n" +
+                    "Model: " + Model,
+                    "Confirm add equipment ",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE
+                );
                 
-                st.execute(query);
-                CategoryLbl.setText("");
-                EquipmentNameLbl.setText("");
-                BrandLbl.setText("");
-                ModelNumLbl.setText("");
+                if(response == JOptionPane.YES_OPTION){
                 
-                showMessageDialog(null, "Equipment added Successfully!");
+                    query = "INSERT INTO rental_equipments(Category, Equipment_Name, Brand, Model_Number, Availability)" +
+                            "VALUES('"+Category+"' , '"+EquipmentName+"' , '"+Brand+"' , '"+Model+"' , '"+Availability+"')";
+
+                    st.execute(query);
+                    CategoryLbl.setText("");
+                    EquipmentNameLbl.setText("");
+                    BrandLbl.setText("");
+                    ModelNumLbl.setText("");
+
+                    showMessageDialog(null, "Equipment added Successfully!");
+                }else{
+                    JOptionPane.showMessageDialog(this, "Add operation canceled.", "Canceled", JOptionPane.INFORMATION_MESSAGE);
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error" + e.getMessage(), "Error Message", JOptionPane.WARNING_MESSAGE);
@@ -210,6 +262,10 @@ public class AddEquipment extends javax.swing.JFrame {
         AmM.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_CanelBtnActionPerformed
+
+    private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DeleteBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -240,6 +296,18 @@ public class AddEquipment extends javax.swing.JFrame {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -250,10 +318,10 @@ public class AddEquipment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel Addtxt;
     private javax.swing.JTextField BrandLbl;
     private javax.swing.JButton CanelBtn;
     private javax.swing.JTextField CategoryLbl;
+    private javax.swing.JButton DeleteBtn;
     private javax.swing.JTextField EquipmentNameLbl;
     private javax.swing.JTextField ModelNumLbl;
     private javax.swing.JButton addBtn;
@@ -261,8 +329,11 @@ public class AddEquipment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }
