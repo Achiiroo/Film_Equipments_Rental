@@ -28,6 +28,7 @@ public class RemoveEquipment extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         jPanel2 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
@@ -44,8 +45,20 @@ public class RemoveEquipment extends javax.swing.JFrame {
         RemoveBtn = new javax.swing.JButton();
         Addtxt = new javax.swing.JLabel();
 
+        jInternalFrame1.setVisible(true);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(500, 400));
         setResizable(false);
 
         jPanel2.setPreferredSize(new java.awt.Dimension(500, 400));
@@ -70,18 +83,11 @@ public class RemoveEquipment extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         jLabel4.setText("Model Number:");
 
-        CategoryLbl.setBackground(new java.awt.Color(255, 255, 255));
         CategoryLbl.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CategoryLblActionPerformed(evt);
             }
         });
-
-        NameLbl.setBackground(new java.awt.Color(255, 255, 255));
-
-        BrandLbl.setBackground(new java.awt.Color(255, 255, 255));
-
-        ModelLbl.setBackground(new java.awt.Color(255, 255, 255));
 
         CanelBtn.setText("Cancel");
         CanelBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -238,6 +244,7 @@ public class RemoveEquipment extends javax.swing.JFrame {
     private javax.swing.JTextField ModelLbl;
     private javax.swing.JTextField NameLbl;
     private javax.swing.JButton RemoveBtn;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
