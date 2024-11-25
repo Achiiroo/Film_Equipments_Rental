@@ -10,8 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 
 
@@ -31,41 +31,9 @@ public class CustomerMain extends javax.swing.JFrame {
      */
     public CustomerMain() {
         initComponents();
-        loadEquipments();
+       
     }
-    
-    private void loadEquipments() {
-    try {
-
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
-        String query = "SELECT Category, Equipment_Name, Brand, Model_Number, Rent_Price FROM rental_equipments";
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery(query);
-        DefaultTableModel model = (DefaultTableModel) EquipmentsTbl.getModel();
-
-        // Clear existing rows in the table
-        model.setRowCount(0);
-
-        // Iterate through the result set
-        while (rs.next()) {
-            String category = rs.getString("Category");
-            String Type = rs.getString("Equipment_Name");
-            String brand = rs.getString("Brand");
-            String modelNumber = rs.getString("Model_Number");
-            String rentPrice = rs.getString("Rent_Price");
-
-            // Add the row to the table model
-            model.addRow(new Object[]{category, Type, brand, modelNumber, rentPrice});
-        }
-
-        // Close the resources
-        rs.close();
-        st.close();
-        con.close();
-    } catch (SQLException e) {
-        System.err.println("Database error: " + e.getMessage());
-    }
-}
+   
 
 
     /**
@@ -96,13 +64,13 @@ public class CustomerMain extends javax.swing.JFrame {
         Cameraslbl = new javax.swing.JPanel();
         CameraSrchBtn = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
+        lensebtn = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
+        lightsbtn = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        soundbtn = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jlabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -194,7 +162,7 @@ public class CustomerMain extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Category", "Type", "Brand", "Model"
+                "Category", "Equipment_Name", "Brand", "Model_Number"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -206,6 +174,11 @@ public class CustomerMain extends javax.swing.JFrame {
             }
         });
         EquipmentsTbl.setRequestFocusEnabled(false);
+        EquipmentsTbl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                EquipmentsTblMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(EquipmentsTbl);
 
         jPanel3.add(jScrollPane3, java.awt.BorderLayout.CENTER);
@@ -236,20 +209,35 @@ public class CustomerMain extends javax.swing.JFrame {
         jPanel6.setPreferredSize(new java.awt.Dimension(138, 92));
         jPanel6.setLayout(new java.awt.BorderLayout());
 
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CAMERA (1).png"))); // NOI18N
-        jPanel6.add(jLabel8, java.awt.BorderLayout.CENTER);
+        lensebtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CAMERA (1).png"))); // NOI18N
+        lensebtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lensebtnMouseClicked(evt);
+            }
+        });
+        jPanel6.add(lensebtn, java.awt.BorderLayout.CENTER);
 
         jPanel7.setPreferredSize(new java.awt.Dimension(138, 92));
         jPanel7.setLayout(new java.awt.BorderLayout());
 
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CAMERA (2).png"))); // NOI18N
-        jPanel7.add(jLabel9, java.awt.BorderLayout.CENTER);
+        lightsbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CAMERA (2).png"))); // NOI18N
+        lightsbtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lightsbtnMouseClicked(evt);
+            }
+        });
+        jPanel7.add(lightsbtn, java.awt.BorderLayout.CENTER);
 
         jPanel8.setPreferredSize(new java.awt.Dimension(138, 92));
         jPanel8.setLayout(new java.awt.BorderLayout());
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CAMERA (3).png"))); // NOI18N
-        jPanel8.add(jLabel10, java.awt.BorderLayout.CENTER);
+        soundbtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/CAMERA (3).png"))); // NOI18N
+        soundbtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                soundbtnMouseClicked(evt);
+            }
+        });
+        jPanel8.add(soundbtn, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -283,9 +271,9 @@ public class CustomerMain extends javax.swing.JFrame {
 
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setBackground(new java.awt.Color(252, 251, 251));
-        jLabel2.setText("jLabel2");
-        jPanel9.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 230, 210));
+        jlabel2.setBackground(new java.awt.Color(252, 251, 251));
+        jlabel2.setText("jLabel2");
+        jPanel9.add(jlabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 230, 210));
 
         jLabel3.setText("Rent Price:");
         jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 100, -1));
@@ -336,6 +324,7 @@ public class CustomerMain extends javax.swing.JFrame {
                 colmnName[i] = rsmd.getColumnName(i+1);
             }
             DefaultTableModel model = (DefaultTableModel) EquipmentsTbl.getModel();
+            model.setRowCount(0);
             model.setColumnIdentifiers(colmnName);
             while(rs.next()){
                     Category = rs.getString(1);
@@ -352,7 +341,126 @@ public class CustomerMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_CameraSrchBtnMouseClicked
 
+    private void lensebtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lensebtnMouseClicked
+        String Category, Type, Brand, Model;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/fers", "root", "");
+            Statement st = con.createStatement();
+            String query = "SELECT Category, Equipment_Name, Brand, Model_Number FROM rental_equipments WHERE Category = 'Lense'";
+            ResultSet rs = st.executeQuery(query);
+            ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+            
 
+            int colmn = rsmd.getColumnCount();
+            String[] colmnName = new String[colmn];
+            for(int i = 0; i<colmn; i++){
+                colmnName[i] = rsmd.getColumnName(i+1);
+            }
+            DefaultTableModel model = (DefaultTableModel) EquipmentsTbl.getModel();
+            model.setRowCount(0);
+            model.setColumnIdentifiers(colmnName);
+            while(rs.next()){
+                    Category = rs.getString(1);
+                    Type = rs.getString(2);
+                    Brand = rs.getString(3);
+                    Model = rs.getString(4);
+                    String[] row = {Category, Type, Brand, Model};
+                    model.addRow(row);
+            }
+            st.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error" + e.getMessage(), "Error Message", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_lensebtnMouseClicked
+
+    private void lightsbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lightsbtnMouseClicked
+        String Category, Type, Brand, Model;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/fers", "root", "");
+            Statement st = con.createStatement();
+            String query = "SELECT Category, Equipment_Name, Brand, Model_Number FROM rental_equipments WHERE Category = 'Light'";
+            ResultSet rs = st.executeQuery(query);
+            ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+            
+
+            int colmn = rsmd.getColumnCount();
+            String[] colmnName = new String[colmn];
+            for(int i = 0; i<colmn; i++){
+                colmnName[i] = rsmd.getColumnName(i+1);
+            }
+            DefaultTableModel model = (DefaultTableModel) EquipmentsTbl.getModel();
+            model.setRowCount(0);
+            model.setColumnIdentifiers(colmnName);
+            while(rs.next()){
+                    Category = rs.getString(1);
+                    Type = rs.getString(2);
+                    Brand = rs.getString(3);
+                    Model = rs.getString(4);
+                    String[] row = {Category, Type, Brand, Model};
+                    model.addRow(row);
+            }
+            st.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error" + e.getMessage(), "Error Message", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_lightsbtnMouseClicked
+
+    private void soundbtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_soundbtnMouseClicked
+        String Category, Type, Brand, Model;
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/fers", "root", "");
+            Statement st = con.createStatement();
+            String query = "SELECT Category, Equipment_Name, Brand, Model_Number FROM rental_equipments WHERE Category = 'Sound'";
+            ResultSet rs = st.executeQuery(query);
+            ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+            
+
+            int colmn = rsmd.getColumnCount();
+            String[] colmnName = new String[colmn];
+            for(int i = 0; i<colmn; i++){
+                colmnName[i] = rsmd.getColumnName(i+1);
+            }
+            DefaultTableModel model = (DefaultTableModel) EquipmentsTbl.getModel();
+            model.setColumnIdentifiers(colmnName);
+            while(rs.next()){
+                    Category = rs.getString(1);
+                    Type = rs.getString(2);
+                    Brand = rs.getString(3);
+                    Model = rs.getString(4);
+                    String[] row = {Category, Type, Brand, Model};
+                    model.addRow(row);
+            }
+            st.close();
+            con.close();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error" + e.getMessage(), "Error Message", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_soundbtnMouseClicked
+
+    private String RentPriceLbl1;
+        
+    
+    private void EquipmentsTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EquipmentsTblMouseClicked
+        int i = EquipmentsTbl.getSelectedRow();
+        TableModel model = EquipmentsTbl.getModel();
+        if (i >= 0) {
+            jTextField2.setText(model.getValueAt(i, 1).toString());
+            jTextField3.setText(model.getValueAt(i, 2).toString());
+            jTextField4.setText(model.getValueAt(i, 3).toString());
+            
+            String rentPrice = RentPriceLbl1;
+            this.RentPriceLbl1 = rentPrice;
+            jTextField1.setText(rentPrice);
+            
+        }
+
+    }//GEN-LAST:event_EquipmentsTblMouseClicked
+    
     /**
      * @param args the command line arguments
      */
@@ -402,16 +510,12 @@ public class CustomerMain extends javax.swing.JFrame {
     private javax.swing.JLabel CustomerAccBtn;
     private javax.swing.JTable EquipmentsTbl;
     private javax.swing.JTextField SearchBarFld;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -429,5 +533,9 @@ public class CustomerMain extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
+    private javax.swing.JLabel jlabel2;
+    private javax.swing.JLabel lensebtn;
+    private javax.swing.JLabel lightsbtn;
+    private javax.swing.JLabel soundbtn;
     // End of variables declaration//GEN-END:variables
 }

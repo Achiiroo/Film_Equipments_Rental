@@ -1,9 +1,15 @@
 package AdminUI;
 
+import CustomerUI.CustomerMain;
+import java.awt.Image;
+import java.io.File;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
 
@@ -44,8 +50,10 @@ public class AddEquipment extends javax.swing.JFrame {
         ModelNumLbl = new javax.swing.JTextField();
         CanelBtn = new javax.swing.JButton();
         addBtn = new javax.swing.JButton();
-        RentPriceLbl = new javax.swing.JTextField();
+        imageTextField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
+        RentPriceLbl1 = new javax.swing.JTextField();
+        imagebtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -117,36 +125,49 @@ public class AddEquipment extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI Emoji", 0, 14)); // NOI18N
         jLabel7.setText("Rent Price");
 
+        imagebtn.setText("Add Image");
+        imagebtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imagebtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ModelNumLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(BrandLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CategoryLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(EquipmentNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(addBtn)
+                                        .addGap(134, 134, 134)
+                                        .addComponent(CanelBtn))
+                                    .addComponent(RentPriceLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(52, 52, 52)
+                        .addComponent(imagebtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(RentPriceLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(20, 20, 20)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(ModelNumLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(BrandLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(CategoryLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(EquipmentNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGap(154, 154, 154)
-                            .addComponent(addBtn)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CanelBtn))))
-                .addContainerGap(83, Short.MAX_VALUE))
+                        .addComponent(imageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,13 +190,17 @@ public class AddEquipment extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RentPriceLbl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addGap(23, 23, 23)
+                    .addComponent(jLabel7)
+                    .addComponent(RentPriceLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(imageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(imagebtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addBtn)
                     .addComponent(CanelBtn))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
         jPanel5.add(jPanel2);
@@ -190,8 +215,9 @@ public class AddEquipment extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBtnActionPerformed
-        String Category, EquipmentName, Brand, Model, RentPrice, Availability;
+        String Category, EquipmentName, Brand, Model, RentPrice, AddImage, Availability;
         String query;
+
         
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -210,16 +236,21 @@ public class AddEquipment extends javax.swing.JFrame {
             }else if("".equals(ModelNumLbl.getText())){
                 JOptionPane.showMessageDialog(this, "Please Enter Model.", "Missing Information", JOptionPane.WARNING_MESSAGE);
                 return;
-            }else if("".equals(RentPriceLbl.getText())){
+            }else if("".equals(RentPriceLbl1.getText())){
                 JOptionPane.showMessageDialog(this, "Please Enter the Rent Price.", "Missing Information", JOptionPane.WARNING_MESSAGE);
                 return;
+            }else if("".equals(imageTextField.getText())){
+                JOptionPane.showMessageDialog(this, "Please Enter correct the image path.", "Missing Information", JOptionPane.WARNING_MESSAGE);
+                return;
             }else{
+              
+                RentPrice = RentPriceLbl1.getText();
                 //Input Values
                 Category = CategoryLbl.getText();
                 EquipmentName = EquipmentNameLbl.getText();
                 Brand = BrandLbl.getText();
                 Model = ModelNumLbl.getText();
-                RentPrice = RentPriceLbl.getText();
+                AddImage = imageTextField.getText();
                 Availability = "Available"; //Default Value for availability
                 
                 int response = JOptionPane.showConfirmDialog(
@@ -229,7 +260,8 @@ public class AddEquipment extends javax.swing.JFrame {
                     "Equipment Name: " + EquipmentName + "\n" +
                     "Brand: " + Brand + "\n" +
                     "Model: " + Model + "\n" +
-                    "Rent Price: " + RentPrice,
+                    "Rent Price: " + RentPrice + "\n" +
+                    "Add Image: " + AddImage,
                     "Confirm add equipment ",
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE
@@ -237,15 +269,15 @@ public class AddEquipment extends javax.swing.JFrame {
                 
                 if(response == JOptionPane.YES_OPTION){
                 
-                    query = "INSERT INTO rental_equipments(Category, Equipment_Name, Brand, Model_Number, Rent_Price, Availability)" +
-                            "VALUES('"+Category+"' , '"+EquipmentName+"' , '"+Brand+"' , '"+Model+"' , '" +RentPrice+"' , '"+Availability+"')";
+                    query = "INSERT INTO rental_equipments(Category, Equipment_Name, Brand, Model_Number, Rent_Price, Availability, ImagePath)" +
+                            "VALUES('"+Category+"' , '"+EquipmentName+"' , '"+Brand+"' , '"+Model+"' , '" +RentPrice+"' , '"+AddImage+ "', '" +Availability+"')";
 
                     st.execute(query);
                     CategoryLbl.setText("");
                     EquipmentNameLbl.setText("");
                     BrandLbl.setText("");
                     ModelNumLbl.setText("");
-                    EquipmentNameLbl.setText("");
+                    RentPriceLbl1.setText("");
 
                     showMessageDialog(null, "Equipment added Successfully!");
                 }else{
@@ -264,6 +296,56 @@ public class AddEquipment extends javax.swing.JFrame {
         AmM.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_CanelBtnActionPerformed
+
+    private void imagebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagebtnActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        JLabel jlabel2 = new JLabel();
+    
+    // Set the file filter to accept only image files
+    fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
+        @Override
+        public boolean accept(File file) {
+            // Allow directories and image files with specific extensions
+            return file.isDirectory() || file.getName().toLowerCase().endsWith(".jpg") ||
+                   file.getName().toLowerCase().endsWith(".jpeg") ||
+                   file.getName().toLowerCase().endsWith(".png") ||
+                   file.getName().toLowerCase().endsWith(".gif");
+        }
+
+        @Override
+        public String getDescription() {
+            return "Image Files (*.jpg, *.jpeg, *.png, *.gif)";
+        }
+    });
+
+    // Show the file chooser dialog
+    int result = fileChooser.showOpenDialog(this); // 'this' refers to the parent frame
+    
+    // Check if the user selected a file
+    if (result == JFileChooser.APPROVE_OPTION) {
+        // Get the selected file
+        File selectedFile = fileChooser.getSelectedFile();
+        
+        // Display the file path in a message dialog
+        JOptionPane.showMessageDialog(this, "Selected file: " + selectedFile.getAbsolutePath());
+        imageTextField.setText(selectedFile.getAbsolutePath());
+        // Optional: Load and display the image in a JLabel
+        ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
+        // Scale the image if needed
+        Image scaledImage = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        imageIcon = new ImageIcon(scaledImage);
+         
+        if(Imagelbl != null){
+            Imagelbl.setIcon(imageIcon);
+        }
+        
+        
+    } else {
+        // User canceled the file chooser
+        JOptionPane.showMessageDialog(this, "No file selected.");
+    }
+    }//GEN-LAST:event_imagebtnActionPerformed
+    
 
     /**
      * @param args the command line arguments
@@ -321,8 +403,10 @@ public class AddEquipment extends javax.swing.JFrame {
     private javax.swing.JTextField CategoryLbl;
     private javax.swing.JTextField EquipmentNameLbl;
     private javax.swing.JTextField ModelNumLbl;
-    private javax.swing.JTextField RentPriceLbl;
+    private javax.swing.JTextField RentPriceLbl1;
     private javax.swing.JButton addBtn;
+    private javax.swing.JTextField imageTextField;
+    private javax.swing.JButton imagebtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
