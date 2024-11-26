@@ -1,6 +1,5 @@
 package AdminUI;
 
-import CustomerUI.CustomerMain;
 import java.awt.Image;
 import java.io.File;
 import java.sql.Connection;
@@ -137,37 +136,33 @@ public class AddEquipment extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(ModelNumLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(BrandLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CategoryLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(EquipmentNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jPanel2Layout.createSequentialGroup()
-                                        .addComponent(addBtn)
-                                        .addGap(134, 134, 134)
-                                        .addComponent(CanelBtn))
-                                    .addComponent(RentPriceLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(imagebtn)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(imageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ModelNumLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BrandLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(CategoryLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EquipmentNameLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(imagebtn)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(addBtn)
+                                .addGap(134, 134, 134)
+                                .addComponent(CanelBtn))
+                            .addComponent(RentPriceLbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(imageTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -251,7 +246,7 @@ public class AddEquipment extends javax.swing.JFrame {
                 Brand = BrandLbl.getText();
                 Model = ModelNumLbl.getText();
                 AddImage = imageTextField.getText();
-                Availability = "Available"; //Default Value for availability
+                Availability = "Available"; 
                 
                 int response = JOptionPane.showConfirmDialog(
                 this,
@@ -269,8 +264,8 @@ public class AddEquipment extends javax.swing.JFrame {
                 
                 if(response == JOptionPane.YES_OPTION){
                 
-                    query = "INSERT INTO rental_equipments(Category, Equipment_Name, Brand, Model_Number, Rent_Price, Availability, ImagePath)" +
-                            "VALUES('"+Category+"' , '"+EquipmentName+"' , '"+Brand+"' , '"+Model+"' , '" +RentPrice+"' , '"+AddImage+ "', '" +Availability+"')";
+                    query = "INSERT INTO rental_equipments(Category, Equipment_Name, Brand, Model_Number, Rent_Price, Availability)" +
+                            "VALUES('"+Category+"' , '"+EquipmentName+"' , '"+Brand+"' , '"+Model+"' , '" +RentPrice+"' , '" +Availability+"')";
 
                     st.execute(query);
                     CategoryLbl.setText("");
@@ -297,56 +292,38 @@ public class AddEquipment extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_CanelBtnActionPerformed
 
+    private String selectedImagePath;
     private void imagebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagebtnActionPerformed
         JFileChooser fileChooser = new JFileChooser();
-        JLabel jlabel2 = new JLabel();
     
-    // Set the file filter to accept only image files
     fileChooser.setFileFilter(new javax.swing.filechooser.FileFilter() {
         @Override
         public boolean accept(File file) {
-            // Allow directories and image files with specific extensions
             return file.isDirectory() || file.getName().toLowerCase().endsWith(".jpg") ||
                    file.getName().toLowerCase().endsWith(".jpeg") ||
-                   file.getName().toLowerCase().endsWith(".png") ||
-                   file.getName().toLowerCase().endsWith(".gif");
+                   file.getName().toLowerCase().endsWith(".png");
         }
 
         @Override
         public String getDescription() {
-            return "Image Files (*.jpg, *.jpeg, *.png, *.gif)";
+            return "Image Files (.jpg, .jpeg, .png)";
         }
     });
 
-    // Show the file chooser dialog
-    int result = fileChooser.showOpenDialog(this); // 'this' refers to the parent frame
+    int result = fileChooser.showOpenDialog(this); 
     
-    // Check if the user selected a file
     if (result == JFileChooser.APPROVE_OPTION) {
-        // Get the selected file
         File selectedFile = fileChooser.getSelectedFile();
         
-        // Display the file path in a message dialog
-        JOptionPane.showMessageDialog(this, "Selected file: " + selectedFile.getAbsolutePath());
         imageTextField.setText(selectedFile.getAbsolutePath());
-        // Optional: Load and display the image in a JLabel
-        ImageIcon imageIcon = new ImageIcon(selectedFile.getAbsolutePath());
-        // Scale the image if needed
-        Image scaledImage = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        imageIcon = new ImageIcon(scaledImage);
-         
-        if(Imagelbl != null){
-            Imagelbl.setIcon(imageIcon);
-        }
-        
-        
+       
+      
     } else {
-        // User canceled the file chooser
+
         JOptionPane.showMessageDialog(this, "No file selected.");
     }
     }//GEN-LAST:event_imagebtnActionPerformed
     
-
     /**
      * @param args the command line arguments
      */
