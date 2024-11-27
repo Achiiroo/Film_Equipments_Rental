@@ -1,6 +1,6 @@
 
 package film_equipments_rental;
-import UI.Login;
+import UI.Start;
 
 /**
  *
@@ -8,7 +8,7 @@ import UI.Login;
  */
 public class Film_Equipments_Rental {
     public static void main(String[] args) {
-        Login MainMenu = new Login();
+        Start MainMenu = new Start();
         MainMenu.setVisible(true);
         MainMenu.pack();
         MainMenu.setLocationRelativeTo(null);
