@@ -6,6 +6,8 @@ package UI;
 
 import AdminUI.AdminMainMenu;
 import CustomerUI.CustomerMain;
+import UI.UserSession;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -19,6 +21,7 @@ import static javax.swing.JOptionPane.showMessageDialog;
  * @author dave
  */
 public class Login extends javax.swing.JFrame {
+    private static String loggedInUserID;
 
     public Login() {
         initComponents();
@@ -174,6 +177,7 @@ public class Login extends javax.swing.JFrame {
                 while(rs.next()){
                     passDb = rs.getString("password");
                     userType = rs.getString("user_type");
+                    loggedInUserID = rs.getString("user_id");
                     notFound = 1;
                     if(Password.equals(passDb)){
                         passMatch = 1;
@@ -181,12 +185,16 @@ public class Login extends javax.swing.JFrame {
                 }
                 if(notFound == 1 && passMatch == 1){
                     if("Admin".equalsIgnoreCase(userType)){
+                        Users loggedInUser = new Users(loggedInUserID, EmailOrUserName, passDb);
+                        UserSession.setCurrentUser(loggedInUser);
                         AdminMainMenu amM = new AdminMainMenu();
                         amM.setVisible(true);
                         amM.pack();
                         amM.setLocationRelativeTo(null);
                         this.dispose();
                     }else if("Customer".equalsIgnoreCase(userType)){
+                        Users loggedInUser = new Users(loggedInUserID, EmailOrUserName, passDb);
+                        UserSession.setCurrentUser(loggedInUser);
                         CustomerMain cmM = new CustomerMain();
                         cmM.setVisible(true);
                         cmM.pack();

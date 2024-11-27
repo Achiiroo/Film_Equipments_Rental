@@ -26,8 +26,8 @@ import javax.swing.table.TableRowSorter;
  */
 
 
-public class CustomerMain extends javax.swing.JFrame {
-    public CustomerMain() {
+public class ReturnEquipment extends javax.swing.JFrame {
+    public ReturnEquipment() {
         initComponents();
         loadEquipments();
     }
@@ -194,7 +194,7 @@ public class CustomerMain extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Category", "Equipment_Name", "Brand", "Model_Number", "Rent Price", "Quantity", "Availability"
+                "Rental_ID", "User_ID", "Item_ID", "Rent_Start", "Rent_End", "Return_Date", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -404,11 +404,7 @@ public class CustomerMain extends javax.swing.JFrame {
     }//GEN-LAST:event_SearchBarFldKeyReleased
 
     private void ReturnbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnbtnActionPerformed
-        ReturnEquipment Re = new ReturnEquipment();
-        Re.setVisible(true);
-        Re.pack();
-        Re.setLocationRelativeTo(null);
-        this.dispose();
+        
     }//GEN-LAST:event_ReturnbtnActionPerformed
 
     private void RentBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentBtn1ActionPerformed
@@ -707,14 +703,22 @@ private void fetchEquipmentByCategory(String category) {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CustomerMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReturnEquipment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CustomerMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReturnEquipment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CustomerMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReturnEquipment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CustomerMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ReturnEquipment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -727,7 +731,7 @@ private void fetchEquipmentByCategory(String category) {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CustomerMain().setVisible(true);
+                new ReturnEquipment().setVisible(true);
             }
         });
     }

@@ -47,7 +47,6 @@ public class SignUp extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Create Account");
-        setPreferredSize(new java.awt.Dimension(853, 511));
 
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 500));
         jPanel1.setLayout(null);
@@ -72,12 +71,12 @@ public class SignUp extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Email:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(480, 150, 32, 16);
+        jLabel3.setBounds(480, 150, 120, 16);
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Fullname:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(480, 80, 52, 16);
+        jLabel2.setBounds(480, 80, 120, 16);
 
         EmailFld.setForeground(new java.awt.Color(35, 35, 35));
         EmailFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -92,7 +91,7 @@ public class SignUp extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("PhoneNumber:");
         jPanel1.add(jLabel4);
-        jLabel4.setBounds(480, 210, 81, 16);
+        jLabel4.setBounds(480, 210, 250, 16);
 
         PhoneNumberFld.setForeground(new java.awt.Color(35, 35, 35));
         PhoneNumberFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -107,7 +106,7 @@ public class SignUp extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Address:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(480, 270, 45, 16);
+        jLabel6.setBounds(480, 270, 210, 16);
 
         AddressFld.setForeground(new java.awt.Color(35, 35, 35));
         AddressFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -122,7 +121,7 @@ public class SignUp extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Password:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(480, 330, 52, 16);
+        jLabel7.setBounds(480, 330, 160, 16);
 
         PasswordFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PasswordFld.addActionListener(new java.awt.event.ActionListener() {
