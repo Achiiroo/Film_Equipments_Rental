@@ -54,7 +54,7 @@ public class Start extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(620, 290, 150, 23);
+        jButton1.setBounds(620, 290, 150, 25);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));

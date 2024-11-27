@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableModel;
@@ -34,16 +35,16 @@ public class CustomerMain extends javax.swing.JFrame {
 
     
     private void loadEquipments() {
-        String Category, Type, Brand, Model, RentPrice, Availability;
+        String Eid, Category, Brand, Model, RentPrice, Availability;
         int Quantity;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
             Statement st = con.createStatement();
 
-            String query = "SELECT Category, Equipment_Name, Brand, Model_Number, Rent_Price, Quantity, Availability "
-                     + "FROM rental_equipments "
-                     + "ORDER BY FIELD(Category, 'Camera', 'Lense', 'Lights', 'Sound')";
+            String query = "SELECT item_id, category, brand, model_num, rent_price, Quantity, availability "
+                     + "FROM equipments "
+                     + "ORDER BY FIELD(category, 'Camera', 'Lense', 'Lights', 'Sound')";
 
             ResultSet rs = st.executeQuery(query);
             ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
@@ -59,15 +60,15 @@ public class CustomerMain extends javax.swing.JFrame {
             model.setColumnIdentifiers(colmnName);
 
             while (rs.next()) {
-                Category = rs.getString("Category");
-                Type = rs.getString("Equipment_Name");
-                Brand = rs.getString("Brand");
-                Model = rs.getString("Model_Number");
-                RentPrice = rs.getString("Rent_Price");
+                Eid = rs.getString("item_id");
+                Category = rs.getString("category");
+                Brand = rs.getString("brand");
+                Model = rs.getString("model_num");
+                RentPrice = rs.getString("rent_price");
                 Quantity = rs.getInt("Quantity");
-                Availability = rs.getString("Availability");
+                Availability = rs.getString("availability");
 
-                String[] row = {Category, Type, Brand, Model, RentPrice, String.valueOf(Quantity), Availability};
+                String[] row = {Eid, Category, Brand, Model, RentPrice, String.valueOf(Quantity), Availability};
                 model.addRow(row);
             }
 
@@ -77,6 +78,21 @@ public class CustomerMain extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error Message", JOptionPane.WARNING_MESSAGE);
         }
     }
+    private ImageIcon getEquipmentImageById(String id) {
+    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
+         PreparedStatement stmt = conn.prepareStatement("SELECT image FROM equipments WHERE equipments.item_id = ?")) {
+        stmt.setString(1, id);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) {
+            byte[] imgData = rs.getBytes("image");
+            return new ImageIcon(imgData);
+        }
+    } catch (SQLException ex) {
+        JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(),
+                                      "Database Error", JOptionPane.ERROR_MESSAGE);
+    }
+    return null;
+}
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -174,7 +190,7 @@ public class CustomerMain extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addComponent(SearchBarFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(searchbtn))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
@@ -194,7 +210,7 @@ public class CustomerMain extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Category", "Equipment_Name", "Brand", "Model_Number", "Rent Price", "Quantity", "Availability"
+                "Equipment Id", "Category", "Brand", "Model_Number", "Rent Price", "Quantity", "Availability"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -370,18 +386,40 @@ public class CustomerMain extends javax.swing.JFrame {
     
     private void EquipmentsTblMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_EquipmentsTblMouseClicked
         int i = EquipmentsTbl.getSelectedRow();
-       if (i >= 0) {
-            TableModel model = EquipmentsTbl.getModel();
-            EquipmentNamelbl.setText(model.getValueAt(i, 1).toString());
-            Brandlbl.setText(model.getValueAt(i, 2).toString());       
-            ModelLbl.setText(model.getValueAt(i, 3).toString());
-            
-            
-            String rentPrice = model.getValueAt(i, 4).toString();
-            RentPricelbl.setText(rentPrice);
-            } else {
-                JOptionPane.showMessageDialog(this, "Please select a row ", "No Selection", JOptionPane.WARNING_MESSAGE);
+        if (i >= 0) {
+            try {
+                TableModel model = EquipmentsTbl.getModel();
+
+                // Fetch values from the selected row
+                String id = model.getValueAt(i, 0).toString(); // Assuming ID is in column 0
+                String brand = model.getValueAt(i, 1).toString();
+                String modelValue = model.getValueAt(i, 2).toString();
+                String rentPrice = model.getValueAt(i, 3).toString();
+
+                // Set combined Brand and Model as Equipment Name
+                EquipmentNamelbl.setText(brand + " " + modelValue);
+
+                // Set other labels
+                Brandlbl.setText(brand);
+                ModelLbl.setText(modelValue);
+                RentPricelbl.setText(rentPrice);
+
+                // Fetch and display image
+                ImageIcon equipmentImage = getEquipmentImageById(id); // Method to retrieve the image
+                if (equipmentImage != null) {
+                    imagelbl.setIcon(equipmentImage); // Assuming ImageLbl is your JLabel for displaying the image
+                } else {
+                    imagelbl.setIcon(null);
+                    JOptionPane.showMessageDialog(this, "No image found for the selected equipment.", 
+                                                  "Image Not Found", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Error while processing the selected row: " + ex.getMessage(),
+                                              "Error", JOptionPane.ERROR_MESSAGE);
             }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a row.", "No Selection", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_EquipmentsTblMouseClicked
 
     private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
@@ -414,136 +452,96 @@ public class CustomerMain extends javax.swing.JFrame {
     private void RentBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentBtn1ActionPerformed
         int selectedRow = EquipmentsTbl.getSelectedRow();
 
-        if (selectedRow <= 0) {
-            JOptionPane.showMessageDialog(this, "Please select an equipment first.", "No Selection", JOptionPane.WARNING_MESSAGE);
+    if (selectedRow < 0) { // Changed to < 0 to correctly detect no selection
+        JOptionPane.showMessageDialog(this, "Please select an equipment first.", "No Selection", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    String brand = EquipmentsTbl.getValueAt(selectedRow, 1).toString();
+    String modelNum = EquipmentsTbl.getValueAt(selectedRow, 2).toString(); // Added to get model_num
+    String availability = EquipmentsTbl.getValueAt(selectedRow, 5).toString();
+    String rentPrice = EquipmentsTbl.getValueAt(selectedRow, 3).toString();
+    int quantity = Integer.parseInt(EquipmentsTbl.getValueAt(selectedRow, 4).toString());
+
+    if ("Rented".equalsIgnoreCase(availability) || quantity <= 0) {
+        JOptionPane.showMessageDialog(this, "This equipment is not available for rent.", "Unavailable", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Check for valid dates
+    if (jDateChooser2.getDate() == null || jDateChooser1.getDate() == null) {
+        JOptionPane.showMessageDialog(this, "Please select both start and end dates.", "Date Missing", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    try {
+        java.util.Date rentStartDate = jDateChooser2.getDate();
+        java.util.Date rentEndDate = jDateChooser1.getDate();
+
+        if (rentStartDate.after(rentEndDate)) {
+            JOptionPane.showMessageDialog(this, "Start date cannot be after the end date.", "Invalid Date Range", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
-        // Retrieve selected equipment details
-        String equipmentName = EquipmentsTbl.getValueAt(selectedRow, 1).toString(); // Equipment Name
-        String availability = EquipmentsTbl.getValueAt(selectedRow, 6).toString(); // Availability
-        String rentPrice = EquipmentsTbl.getValueAt(selectedRow, 4).toString(); // Rent Price
-        int quantity = Integer.parseInt(EquipmentsTbl.getValueAt(selectedRow, 5).toString()); // Quantity
+        String rentStart = new SimpleDateFormat("yyyy-MM-dd").format(rentStartDate);
+        String rentEnd = new SimpleDateFormat("yyyy-MM-dd").format(rentEndDate);
 
-        if ("Rented".equalsIgnoreCase(availability) || quantity <= 0) {
-            JOptionPane.showMessageDialog(this, "This equipment is not available for rent.", "Unavailable", JOptionPane.WARNING_MESSAGE);
+        // Calculate total rent price
+        long days = (rentEndDate.getTime() - rentStartDate.getTime()) / (1000 * 60 * 60 * 24);
+        if (days <= 0) {
+            JOptionPane.showMessageDialog(this, "Rental period must be at least one day.", "Invalid Period", JOptionPane.WARNING_MESSAGE);
             return;
         }
+        double totalAmount = Double.parseDouble(rentPrice) * days;
 
-        if (jDateChooser2.getDate() == null || jDateChooser1.getDate() == null) {
-            JOptionPane.showMessageDialog(this, "Please select both start and end dates.", "Date Missing", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "")) {
+            String getItemQuery = "SELECT item_id FROM equipments WHERE equipments.brand = ? AND equipments.model_num = ?";
+            try (PreparedStatement pstGetId = con.prepareStatement(getItemQuery)) {
+                pstGetId.setString(1, brand);
+                pstGetId.setString(2, modelNum);
+                ResultSet rs = pstGetId.executeQuery();
 
-        try {
-            java.util.Date rentStartDate = jDateChooser2.getDate();
-            java.util.Date rentEndDate = jDateChooser1.getDate();
+                if (rs.next()) {
+                    int itemId = rs.getInt("item_id");
 
-            if (rentStartDate.after(rentEndDate)) {
-                JOptionPane.showMessageDialog(this, "Start date cannot be after the end date.", "Invalid Date Range", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
+                    // Insert rental record
+                    String insertQuery = "INSERT INTO rentals (item_id, user_id, rent_start, rent_end, total_amount, status) VALUES (?, ?, ?, ?, ?, ?)";
+                    try (PreparedStatement pstInsert = con.prepareStatement(insertQuery)) {
+                        pstInsert.setInt(1, itemId);
+                        pstInsert.setString(2, UserSession.getCurrentUserID());
+                        pstInsert.setString(3, rentStart);
+                        pstInsert.setString(4, rentEnd);
+                        pstInsert.setDouble(5, totalAmount);
+                        pstInsert.setString(6, "Rented");
 
-            String rentStart = new SimpleDateFormat("yyyy-MM-dd").format(rentStartDate);
-            String rentEnd = new SimpleDateFormat("yyyy-MM-dd").format(rentEndDate);
+                        int rowsInserted = pstInsert.executeUpdate();
 
-            double totalAmount = Double.parseDouble(rentPrice) * (rentEndDate.getTime() - rentStartDate.getTime()) / (1000 * 60 * 60 * 24);
+                        if (rowsInserted > 0) {
+                            // Update equipment availability and quantity
+                            String updateQuery = "UPDATE equipments SET quantity = quantity - 1, availability = ? WHERE equipments.item_id = ?";
+                            try (PreparedStatement pstUpdate = con.prepareStatement(updateQuery)) {
+                                pstUpdate.setString(1, quantity - 1 == 0 ? "Rented" : "Available");
+                                pstUpdate.setInt(2, itemId);
+                                pstUpdate.executeUpdate();
 
-            Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
+                                // Update UI table
+                                EquipmentsTbl.setValueAt(quantity - 1, selectedRow, 3);
+                                EquipmentsTbl.setValueAt(quantity - 1 == 0 ? "Rented" : "Available", selectedRow, 5);
 
-            // Get equipment item_id
-            String getItemQuery = "SELECT item_id FROM rental_equipments WHERE equipment_name = ?";
-            var pstGetId = con.prepareStatement(getItemQuery);
-            pstGetId.setString(1, equipmentName);
-            ResultSet rs = pstGetId.executeQuery();
-
-            if (rs.next()) {
-                int itemId = rs.getInt("item_id");
-
-                // Insert rental details into user_rentals table
-                String insertQuery = "INSERT INTO user_rentals (item_id, user_id, rent_start, rent_end, total_amount, status) VALUES (?, ?, ?, ?, ?, ?)";
-                var pstInsert = con.prepareStatement(insertQuery);
-                pstInsert.setInt(1, itemId);
-                pstInsert.setString(2, UserSession.getCurrentUserID()); // Ensure currentUserId is set during login
-                pstInsert.setString(3, rentStart);
-                pstInsert.setString(4, rentEnd);
-                pstInsert.setDouble(5, totalAmount);
-                pstInsert.setString(6, "Rented");
-
-                int rowsInserted = pstInsert.executeUpdate();
-
-                if (rowsInserted > 0) {
-                    // Update equipment quantity
-                    String updateQuery = "UPDATE rental_equipments SET quantity = quantity - 1 WHERE item_id = ?";
-                    var pstUpdate = con.prepareStatement(updateQuery);
-                    pstUpdate.setInt(1, itemId);
-                    pstUpdate.executeUpdate();
-
-                    // Update UI
-                    EquipmentsTbl.setValueAt(quantity - 1, selectedRow, 5);
-                    if (quantity - 1 == 0) {
-                        EquipmentsTbl.setValueAt("Rented", selectedRow, 6);
+                                JOptionPane.showMessageDialog(this, "Equipment rented successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Failed to rent the equipment. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
                     }
-
-                    JOptionPane.showMessageDialog(this, "Equipment rented successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                 } else {
-                    JOptionPane.showMessageDialog(this, "Failed to rent the equipment. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Equipment not found in the database.", "Error", JOptionPane.ERROR_MESSAGE);
                 }
-            } else {
-                JOptionPane.showMessageDialog(this, "Equipment not found in the database.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-
-            // Close connections
-            pstGetId.close();
-            con.close();
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
     }//GEN-LAST:event_RentBtn1ActionPerformed
-    
-
-    
-    private void login(String username, String password) {
-        // Fetch the user ID from the database
-        int user_id = getUserId(username, password);
-
-        if (user_id > 0) {  // Valid user ID (user found in the database)
-            currentUserId = user_id;  // Assign the user ID to currentUserId
-            JOptionPane.showMessageDialog(this, "Login successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
-            
-        } else {  // Invalid credentials
-            currentUserId = user_id;  // Reset currentUserId
-            JOptionPane.showMessageDialog(this, "Invalid username or password!", "Login Failed", JOptionPane.ERROR_MESSAGE);
-        }
-    }
-
-    private int currentUserId;
-    
-    private int getUserId(String username, String password) {
-        
-    // Database connection and query execution
-    try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
-         PreparedStatement pst = con.prepareStatement(
-            "SELECT user_id FROM fers_users WHERE (full_name = ? OR email = ?) AND password = ?")){
-
-        // Set the parameters for the query
-        pst.setString(1, username);
-        pst.setString(2, username);
-        pst.setString(3, password);
-
-        // Execute the query
-        try (ResultSet rs = pst.executeQuery()) {
-            if (rs.next()) {
-                currentUserId = rs.getInt("user_id");  // Retrieve user ID
-            }
-        }
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Database error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    }
-
-    return currentUserId;  // Return the user ID (or -1 if not found)
-}
-
 
     private boolean rentEquipment(String item_id, String rentPrice, int user_id) {
     
@@ -556,13 +554,13 @@ public class CustomerMain extends javax.swing.JFrame {
         Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
         con.setAutoCommit(false);
-        String updateQuery = "UPDATE rental_equipments SET availability = 'Rented' WHERE item_id = ?";
+        String updateQuery = "UPDATE equipments SET availability = 'Rented' WHERE item_id = ?";
         stmtUpdate = con.prepareStatement(updateQuery); 
         int rowsUpdated = stmtUpdate.executeUpdate(updateQuery);
 
         if (rowsUpdated > 0) {
             String rent_id = java.util.UUID.randomUUID().toString();
-             String insertQuery = "INSERT INTO user_rentals (rent_id, user_id, item_id, rent_price, rental_date) VALUES (?, ?, ?, ?, NOW())";
+             String insertQuery = "INSERT INTO rentals (rent_id, user_id, item_id, rent_price, rental_date) VALUES (?, ?, ?, ?, NOW())";
             stmtInsert = con.prepareStatement(insertQuery);
 
             int rowsInserted = stmtInsert.executeUpdate(insertQuery);
@@ -599,7 +597,7 @@ public class CustomerMain extends javax.swing.JFrame {
 }
 
 private boolean updateAvailabilityInfers(int item_id, String newAvailability) {
-    String query = "UPDATE rental_equipments SET Availability = ? WHERE item_id = ?";
+    String query = "UPDATE equipments SET Availability = ? WHERE equipments.item_id = ?";
 
     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
         Statement stmt = conn.createStatement()){
@@ -623,12 +621,12 @@ private String fetchRentPrice(String item_id) {
         Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
 
-        String query = "SELECT Rent_Price FROM rental_equipments WHERE item_id = '" + item_id + "'";
+        String query = "SELECT rent_price FROM equipments WHERE equipments.item_id = '" + item_id + "'";
         st = con.createStatement();
         rs = st.executeQuery(query);
 
         if (rs.next()) {
-            rentPrice = rs.getString("Rent_Price"); 
+            rentPrice = rs.getString("rent_price"); 
         }
     } catch (Exception e) {
         e.printStackTrace();
@@ -646,46 +644,42 @@ private String fetchRentPrice(String item_id) {
 }
 
 private void fetchEquipmentByCategory(String category) {
-    String Category, Type, Brand, Model, RentPrice, Availability;
-    int Quantity;
+    String query = "SELECT category, equipment_name, brand, model_num, rent_price, quantity, availability " +
+                   "FROM equipments WHERE category = ?";
     try {
+        // Establish database connection
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
-        Statement st = con.createStatement();
+        try (Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
+             PreparedStatement pst = con.prepareStatement(query)) {
 
-        String query = "SELECT Category, Equipment_Name, Brand, Model_Number, Rent_Price, Quantity, Availability " +
-                       "FROM rental_equipments WHERE Category = '" + category + "'";
+            pst.setString(1, category);
+            ResultSet rs = pst.executeQuery();
 
-        ResultSet rs = st.executeQuery(query);
-        ResultSetMetaData rsmd = (ResultSetMetaData) rs.getMetaData();
+            DefaultTableModel model = (DefaultTableModel) EquipmentsTbl.getModel();
+            model.setRowCount(0); // Clear existing rows
+            String[] columnNames = {"Category", "Equipment Name", "Brand", "Model Number", "Rent Price", "Quantity", "Availability"};
+            model.setColumnIdentifiers(columnNames);
 
-        int colmn = rsmd.getColumnCount();
-        String[] colmnName = new String[colmn];
-        for (int i = 0; i < colmn; i++) {
-            colmnName[i] = rsmd.getColumnName(i + 1);
+            // Populate the table with query results
+            while (rs.next()) {
+                String categoryValue = rs.getString("category");
+                String equipmentName = rs.getString("equipment_name");
+                String brand = rs.getString("brand");
+                String modelNum = rs.getString("model_num");
+                String rentPrice = rs.getString("rent_price");
+                int quantity = rs.getInt("quantity");
+                String availability = rs.getString("availability");
+
+                Object[] row = {categoryValue, equipmentName, brand, modelNum, rentPrice, quantity, availability};
+                model.addRow(row);
+            }
         }
-
-        DefaultTableModel model = (DefaultTableModel) EquipmentsTbl.getModel();
-        model.setRowCount(0);
-        model.setColumnIdentifiers(colmnName); 
-
-        while (rs.next()) {
-            Category = rs.getString("Category");
-            Type = rs.getString("Equipment_Name");
-            Brand = rs.getString("Brand");
-            Model = rs.getString("Model_Number");
-            RentPrice = rs.getString("Rent_Price");
-            Quantity = rs.getInt("Quantity");
-            Availability = rs.getString("Availability");
-
-            String[] row = {Category, Type, Brand, Model, RentPrice, String.valueOf(Quantity), Availability};
-            model.addRow(row);
-        }
-
-        st.close();
-        con.close();
+    } catch (ClassNotFoundException e) {
+        JOptionPane.showMessageDialog(this, "Database Driver not found: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Database Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error Message", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Unexpected Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
 }
     /**

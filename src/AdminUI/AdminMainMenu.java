@@ -35,9 +35,6 @@ public class AdminMainMenu extends javax.swing.JFrame {
         LogOutBtn = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         AddEquipmentBtn = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
         jButton8 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
@@ -98,23 +95,12 @@ public class AdminMainMenu extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(221, 221, 221));
         jPanel2.setForeground(new java.awt.Color(153, 153, 153));
 
-        AddEquipmentBtn.setText("Add Equipment");
+        AddEquipmentBtn.setText("Equipments");
         AddEquipmentBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddEquipmentBtnActionPerformed(evt);
             }
         });
-
-        jButton5.setText("Remove Equipment");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
-            }
-        });
-
-        jButton6.setText("Update Equipment");
-
-        jButton7.setText("VIew Equipments");
 
         jButton8.setText("Update Rental Status");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -149,45 +135,36 @@ public class AdminMainMenu extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(130, 130, 130)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton6)
-                            .addComponent(AddEquipmentBtn)
-                            .addComponent(jButton7))
-                        .addGap(69, 69, 69)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton8)
                             .addComponent(jButton10)
-                            .addComponent(jButton11)
-                            .addComponent(jButton9))
-                        .addContainerGap(28, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(9, 9, 9)
+                                .addComponent(jButton11))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton8)
-                        .addGap(40, 40, 40))))
+                        .addGap(147, 147, 147)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(AddEquipmentBtn)
+                            .addComponent(jButton9))))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AddEquipmentBtn)
-                    .addComponent(jButton9))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
-                    .addComponent(jButton8))
-                .addGap(36, 36, 36)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton11))
-                .addGap(34, 34, 34)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton7)
-                    .addComponent(jButton10))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(AddEquipmentBtn)
+                .addGap(28, 28, 28)
+                .addComponent(jButton9)
+                .addGap(30, 30, 30)
+                .addComponent(jButton8)
+                .addGap(30, 30, 30)
+                .addComponent(jButton11)
+                .addGap(26, 26, 26)
+                .addComponent(jButton10)
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
@@ -207,16 +184,12 @@ public class AdminMainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_LogOutBtnActionPerformed
 
     private void AddEquipmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEquipmentBtnActionPerformed
-        AddEquipment add = new AddEquipment();
+        CRUDequipment add = new CRUDequipment();
         add.setVisible(true);
         add.pack();
         add.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_AddEquipmentBtnActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         // TODO add your handling code here:
@@ -274,9 +247,6 @@ public class AdminMainMenu extends javax.swing.JFrame {
     private javax.swing.JButton LogOutBtn;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JButton jButton8;
     private javax.swing.JButton jButton9;
     private javax.swing.JLabel jLabel5;
