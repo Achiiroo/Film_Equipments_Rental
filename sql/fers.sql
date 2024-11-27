@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2024 at 08:02 AM
+-- Generation Time: Nov 27, 2024 at 11:42 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -20,6 +20,23 @@ SET time_zone = "+00:00";
 --
 -- Database: `fers`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `equipments`
+--
+
+CREATE TABLE `equipments` (
+  `item_id` int(11) NOT NULL,
+  `category` varchar(200) NOT NULL,
+  `brand` varchar(200) NOT NULL,
+  `model_num` varchar(200) NOT NULL,
+  `availability` varchar(255) NOT NULL,
+  `rent_price` double(10,2) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `image` longblob NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -42,9 +59,8 @@ CREATE TABLE `fers_users` (
 --
 
 INSERT INTO `fers_users` (`user_id`, `full_name`, `email`, `password`, `user_type`, `address`, `phone_number`) VALUES
-(10, 'JohnDave', 'johndavebriones@gmail.com', 'admin123', 'Admin', 'Brgy.Tanggoy', '09165905802'),
-(11, 'LinuxAdona', 'Linux@gmail.com', 'Linux123', 'Customer', 'Brgy.Malalay', '09156847372'),
-(12, 'Admin2', 'Admin2@gmail.com', 'admin123', 'Admin', 'Brgy.Bucana', '09183472832');
+(1, 'JohnDave', 'johndavebriones@gmail.com', 'admin123', 'Admin', 'Brgy.Tanggoy', '09165905802'),
+(2, 'janemanuel', 'janemanuelform@gmail.com', 'customer123', 'Customer', 'Brgy.Omsim', '09247281631');
 
 -- --------------------------------------------------------
 
@@ -70,35 +86,24 @@ CREATE TABLE `payment` (
 --
 
 CREATE TABLE `rentals` (
-  `rent_id` int(11) NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `user_id` int(11) NOT NULL,
-  `Rent_Start` datetime NOT NULL,
-  `Rent_End` datetime NOT NULL,
-  `Actual_Rent_Date` datetime NOT NULL,
-  `Total_Amount` decimal(10,2) NOT NULL,
-  `status` enum('available','not available') NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rental_equipments`
---
-
-CREATE TABLE `rental_equipments` (
-  `item_id` int(11) NOT NULL,
-  `Category` varchar(255) NOT NULL,
-  `Equipment_Name` varchar(255) NOT NULL,
-  `Brand` varchar(100) NOT NULL,
-  `Model_Number` varchar(255) NOT NULL,
-  `Condition` enum('New','Good','Damaged') NOT NULL DEFAULT 'New',
-  `Availability` enum('Available','Rented') NOT NULL DEFAULT 'Available'
+  `rental_id` int(11) NOT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  `item_id` int(11) DEFAULT NULL,
+  `rent_start` date DEFAULT NULL,
+  `rent_end` date DEFAULT NULL,
+  `total_amount` decimal(10,2) NOT NULL,
+  `status` varchar(50) DEFAULT 'Rented'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `equipments`
+--
+ALTER TABLE `equipments`
+  ADD PRIMARY KEY (`item_id`);
 
 --
 -- Indexes for table `fers_users`
@@ -110,35 +115,42 @@ ALTER TABLE `fers_users`
 -- Indexes for table `rentals`
 --
 ALTER TABLE `rentals`
-  ADD PRIMARY KEY (`rent_id`);
-
---
--- Indexes for table `rental_equipments`
---
-ALTER TABLE `rental_equipments`
-  ADD PRIMARY KEY (`item_id`);
+  ADD PRIMARY KEY (`rental_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `equipment_id` (`item_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
+-- AUTO_INCREMENT for table `equipments`
+--
+ALTER TABLE `equipments`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `fers_users`
 --
 ALTER TABLE `fers_users`
-  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `user_id` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `rentals`
 --
 ALTER TABLE `rentals`
-  MODIFY `rent_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `rental_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `rental_equipments`
+-- Constraints for dumped tables
 --
-ALTER TABLE `rental_equipments`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Constraints for table `rentals`
+--
+ALTER TABLE `rentals`
+  ADD CONSTRAINT `rentals_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `fers_users` (`user_id`),
+  ADD CONSTRAINT `rentals_ibfk_2` FOREIGN KEY (`item_id`) REFERENCES `equipments` (`item_id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
