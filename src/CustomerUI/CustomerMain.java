@@ -321,7 +321,7 @@ public class CustomerMain extends javax.swing.JFrame {
 
         jPanel9.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 100, -1));
-        jPanel9.add(RentPricelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 240, -1));
+        jPanel9.add(RentPricelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 110, 240, -1));
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Rent End:");
@@ -330,17 +330,17 @@ public class CustomerMain extends javax.swing.JFrame {
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Brand:");
-        jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 100, -1));
-        jPanel9.add(Brandlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 240, -1));
+        jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 100, -1));
+        jPanel9.add(Brandlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 50, 240, -1));
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Model:");
-        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 100, -1));
-        jPanel9.add(ModelLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 240, -1));
+        jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 80, 100, -1));
+        jPanel9.add(ModelLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 240, -1));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Rent Price:");
-        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 100, -1));
+        jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 110, 100, -1));
 
         RentBtn1.setText("Rent");
         RentBtn1.addActionListener(new java.awt.event.ActionListener() {
@@ -348,7 +348,7 @@ public class CustomerMain extends javax.swing.JFrame {
                 RentBtn1ActionPerformed(evt);
             }
         });
-        jPanel9.add(RentBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
+        jPanel9.add(RentBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 200, -1, -1));
         jPanel9.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 150, -1));
 
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
@@ -369,7 +369,7 @@ public class CustomerMain extends javax.swing.JFrame {
                 ReturnbtnActionPerformed(evt);
             }
         });
-        jPanel9.add(Returnbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
+        jPanel9.add(Returnbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 200, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/film 3 blur (1000 x 800 px).png"))); // NOI18N
         jLabel1.setText("jLabel1");
@@ -662,7 +662,7 @@ private String fetchRentPrice(String item_id) {
 }
 
 private void fetchEquipmentByCategory(String category) {
-    String query = "SELECT category, equipment_name, brand, model_num, rent_price, quantity, status " +
+    String query = "SELECT category, brand, model_num, rent_price, quantity, status " +
                    "FROM equipments WHERE category = ?";
     try {
         // Establish database connection
@@ -681,14 +681,13 @@ private void fetchEquipmentByCategory(String category) {
             // Populate the table with query results
             while (rs.next()) {
                 String categoryValue = rs.getString("category");
-                String equipmentName = rs.getString("equipment_name");
                 String brand = rs.getString("brand");
                 String modelNum = rs.getString("model_num");
                 String rentPrice = rs.getString("rent_price");
                 int quantity = rs.getInt("quantity");
                 String Status = rs.getString("status");
 
-                Object[] row = {categoryValue, equipmentName, brand, modelNum, rentPrice, quantity, Status};
+                Object[] row = {categoryValue, brand, modelNum, rentPrice, quantity, Status};
                 model.addRow(row);
             }
         }
