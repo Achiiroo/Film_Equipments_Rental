@@ -32,8 +32,8 @@ public class AdminMainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        updatePayBtn = new javax.swing.JButton();
-        payHistoryBtn = new javax.swing.JButton();
+        PaymentRecords = new javax.swing.JButton();
+        RentalRecords = new javax.swing.JButton();
         EquipmentsBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -49,25 +49,25 @@ public class AdminMainMenu extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.setLayout(null);
 
-        updatePayBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        updatePayBtn.setText("Payment Records");
-        updatePayBtn.addActionListener(new java.awt.event.ActionListener() {
+        PaymentRecords.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        PaymentRecords.setText("Payment Records");
+        PaymentRecords.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updatePayBtnActionPerformed(evt);
+                PaymentRecordsActionPerformed(evt);
             }
         });
-        jPanel1.add(updatePayBtn);
-        updatePayBtn.setBounds(570, 290, 280, 70);
+        jPanel1.add(PaymentRecords);
+        PaymentRecords.setBounds(570, 290, 280, 70);
 
-        payHistoryBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        payHistoryBtn.setText("Rental Records");
-        payHistoryBtn.addActionListener(new java.awt.event.ActionListener() {
+        RentalRecords.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        RentalRecords.setText("Rental Records");
+        RentalRecords.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                payHistoryBtnActionPerformed(evt);
+                RentalRecordsActionPerformed(evt);
             }
         });
-        jPanel1.add(payHistoryBtn);
-        payHistoryBtn.setBounds(570, 420, 280, 70);
+        jPanel1.add(RentalRecords);
+        RentalRecords.setBounds(570, 420, 280, 70);
 
         EquipmentsBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         EquipmentsBtn.setText("Equipments");
@@ -134,17 +134,17 @@ public class AdminMainMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_EquipmentsBtnActionPerformed
 
-    private void updatePayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePayBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_updatePayBtnActionPerformed
-
-    private void payHistoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payHistoryBtnActionPerformed
+    private void PaymentRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentRecordsActionPerformed
         ViewPaymentHistory pay = new ViewPaymentHistory();
         pay.setVisible(true);
         pay.pack();
         pay.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_payHistoryBtnActionPerformed
+    }//GEN-LAST:event_PaymentRecordsActionPerformed
+
+    private void RentalRecordsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentalRecordsActionPerformed
+        
+    }//GEN-LAST:event_RentalRecordsActionPerformed
 
     private void jLabel6ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel6ComponentMoved
         // TODO add your handling code here:
@@ -154,12 +154,12 @@ public class AdminMainMenu extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EquipmentsBtn;
     private javax.swing.JButton LogOutBtn1;
+    private javax.swing.JButton PaymentRecords;
+    private javax.swing.JButton RentalRecords;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JButton payHistoryBtn;
-    private javax.swing.JButton updatePayBtn;
     // End of variables declaration//GEN-END:variables
 }

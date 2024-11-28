@@ -1,8 +1,7 @@
 
 package UI;
+import Database.DatabaseConn;
 import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import static javax.swing.JOptionPane.showMessageDialog;
@@ -31,8 +30,6 @@ public class SignUp extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         EmailFld = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        PhoneNumberFld = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         AddressFld = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -66,17 +63,17 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(FullnameFld);
-        FullnameFld.setBounds(480, 110, 290, 27);
+        FullnameFld.setBounds(480, 130, 290, 27);
 
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Email:");
         jPanel1.add(jLabel3);
-        jLabel3.setBounds(480, 150, 120, 15);
+        jLabel3.setBounds(480, 170, 120, 16);
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Fullname:");
+        jLabel2.setText("Username:");
         jPanel1.add(jLabel2);
-        jLabel2.setBounds(480, 80, 120, 15);
+        jLabel2.setBounds(480, 100, 120, 16);
 
         EmailFld.setForeground(new java.awt.Color(35, 35, 35));
         EmailFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -86,27 +83,12 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(EmailFld);
-        EmailFld.setBounds(480, 170, 290, 27);
-
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("PhoneNumber:");
-        jPanel1.add(jLabel4);
-        jLabel4.setBounds(480, 210, 250, 15);
-
-        PhoneNumberFld.setForeground(new java.awt.Color(35, 35, 35));
-        PhoneNumberFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        PhoneNumberFld.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                PhoneNumberFldActionPerformed(evt);
-            }
-        });
-        jPanel1.add(PhoneNumberFld);
-        PhoneNumberFld.setBounds(480, 230, 290, 27);
+        EmailFld.setBounds(480, 190, 290, 27);
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Address:");
         jPanel1.add(jLabel6);
-        jLabel6.setBounds(480, 270, 210, 15);
+        jLabel6.setBounds(480, 240, 210, 16);
 
         AddressFld.setForeground(new java.awt.Color(35, 35, 35));
         AddressFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -116,12 +98,12 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(AddressFld);
-        AddressFld.setBounds(480, 290, 290, 27);
+        AddressFld.setBounds(480, 260, 290, 27);
 
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Password:");
         jPanel1.add(jLabel7);
-        jLabel7.setBounds(480, 330, 160, 15);
+        jLabel7.setBounds(480, 300, 160, 16);
 
         PasswordFld.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         PasswordFld.addActionListener(new java.awt.event.ActionListener() {
@@ -130,7 +112,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(PasswordFld);
-        PasswordFld.setBounds(480, 350, 290, 27);
+        PasswordFld.setBounds(480, 320, 290, 27);
 
         SignUpBtn.setBackground(new java.awt.Color(51, 51, 51));
         SignUpBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -142,7 +124,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(SignUpBtn);
-        SignUpBtn.setBounds(480, 390, 70, 19);
+        SignUpBtn.setBounds(480, 370, 70, 20);
 
         OptionsCmbBx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Admin", "Customer" }));
         OptionsCmbBx.setPreferredSize(new java.awt.Dimension(120, 20));
@@ -152,14 +134,14 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(OptionsCmbBx);
-        OptionsCmbBx.setBounds(650, 390, 120, 20);
+        OptionsCmbBx.setBounds(650, 370, 120, 20);
 
         jLabel5.setBackground(new java.awt.Color(225, 225, 225));
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 10)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("I already have an account");
         jPanel1.add(jLabel5);
-        jLabel5.setBounds(614, 430, 120, 14);
+        jLabel5.setBounds(610, 410, 120, 14);
 
         jButton2.setForeground(new java.awt.Color(255, 51, 51));
         jButton2.setText("Login");
@@ -170,7 +152,7 @@ public class SignUp extends javax.swing.JFrame {
             }
         });
         jPanel1.add(jButton2);
-        jButton2.setBounds(740, 430, 45, 17);
+        jButton2.setBounds(740, 410, 45, 18);
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/Untitled design (49).png"))); // NOI18N
         jPanel1.add(jLabel8);
@@ -199,17 +181,15 @@ public class SignUp extends javax.swing.JFrame {
     }//GEN-LAST:event_AddressFldActionPerformed
 
     private void SignUpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SignUpBtnActionPerformed
-        String Fullname, Email, Password, Phone, Address;
+        String Fullname, Email, Password, Address;
         String query, Options;
-        String SUrl, SUser, SPass;
         
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection con = DriverManager.getConnection("jdbc:MySQL://localhost:3306/fers", "root", "");
+            Connection con = DatabaseConn.connect();
             Statement st = con.createStatement();
             
             if("".equals(FullnameFld.getText())){
-                JOptionPane.showMessageDialog(this, "Please enter your full name.", "Missing Information", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Please enter your Username.", "Missing Information", JOptionPane.WARNING_MESSAGE);
             }else if ("".equals(EmailFld.getText())){
                 JOptionPane.showMessageDialog(this, "Please enter your email", "Missing Information", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -219,15 +199,11 @@ public class SignUp extends javax.swing.JFrame {
             }else if("".equals(AddressFld.getText())){
                 JOptionPane.showMessageDialog(this, "Please enter your Address", "Missing Information", JOptionPane.WARNING_MESSAGE);
                 return;
-            }else if("".equals(PhoneNumberFld.getText())){
-                JOptionPane.showMessageDialog(this, "Please enter your Phone Number", "Missing Information", JOptionPane.WARNING_MESSAGE);
-                return;
             }
             else{
                 Fullname = FullnameFld.getText();
                 Email = EmailFld.getText();
                 Password = PasswordFld.getText();
-                Phone = PhoneNumberFld.getText();
                 Address = AddressFld.getText();
                 Options = (String) OptionsCmbBx.getSelectedItem();
                 
@@ -240,14 +216,13 @@ public class SignUp extends javax.swing.JFrame {
                 );
                 
                 if(response ==  JOptionPane.YES_OPTION){
-                    query = "INSERT INTO fers_users(full_name, email, password, user_type, address, phone_number)" +
-                            "VALUES('"+Fullname+"' , '"+Email+"' , '"+Password+"' , '"+Options+"' , '"+Address+"' , '"+Phone+"')";
+                    query = "INSERT INTO fers_user(username, email, password, user_type, address)" +
+                            "VALUES('"+Fullname+"' , '"+Email+"' , '"+Password+"' , '"+Options+"' , '"+Address+"')";
 
                     st.execute(query);
                     FullnameFld.setText("");
                     EmailFld.setText("");
                     PasswordFld.setText("");
-                    PhoneNumberFld.setText("");
                     AddressFld.setText("");
                     OptionsCmbBx.setSelectedItem(0);
 
@@ -280,10 +255,6 @@ public class SignUp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_EmailFldActionPerformed
 
-    private void PhoneNumberFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PhoneNumberFldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PhoneNumberFldActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AddressFld;
@@ -291,13 +262,11 @@ public class SignUp extends javax.swing.JFrame {
     private javax.swing.JTextField FullnameFld;
     private javax.swing.JComboBox<String> OptionsCmbBx;
     private javax.swing.JPasswordField PasswordFld;
-    private javax.swing.JTextField PhoneNumberFld;
     private javax.swing.JButton SignUpBtn;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;

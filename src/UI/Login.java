@@ -6,15 +6,12 @@ package UI;
 
 import AdminUI.AdminMainMenu;
 import CustomerUI.CustomerMain;
-import UI.UserSession;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.showMessageDialog;
 
 /**
  *
@@ -171,7 +168,7 @@ public class Login extends javax.swing.JFrame {
             else{
                 EmailOrUserName = EmailFld.getText();
                 Password = PasswordFld.getText();
-                query = "SELECT * FROM fers_users WHERE email= '"+EmailOrUserName+"' OR full_name= '"+EmailOrUserName+"'";
+                query = "SELECT * FROM fers_user WHERE email= '"+EmailOrUserName+"' OR username = '"+EmailOrUserName+"'";
                 ResultSet rs = st.executeQuery(query);
 
                 while(rs.next()){

@@ -779,7 +779,7 @@ public class CRUDequipment extends javax.swing.JFrame {
     }//GEN-LAST:event_DeleteHistoryActionPerformed
 
     private void UpdateLogsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateLogsActionPerformed
-        DeleteHistory updLogs = new DeleteHistory();
+        UpdateLogs updLogs = new UpdateLogs();
         updLogs.setVisible(true);
         updLogs.setLocationRelativeTo(null);
     }//GEN-LAST:event_UpdateLogsActionPerformed

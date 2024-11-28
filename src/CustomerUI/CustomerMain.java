@@ -175,6 +175,11 @@ public class CustomerMain extends javax.swing.JFrame {
         });
 
         CustomerAccBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/User Icon.png"))); // NOI18N
+        CustomerAccBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CustomerAccBtnMouseClicked(evt);
+            }
+        });
 
         searchbtn.setText("Search");
         searchbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -491,24 +496,22 @@ public class CustomerMain extends javax.swing.JFrame {
         String rentPrice = EquipmentsTbl.getValueAt(selectedRow, 4).toString(); 
         int availableQuantity = Integer.parseInt(EquipmentsTbl.getValueAt(selectedRow, 5).toString()); 
         int quantityToRent;
-        
+
         try {
-        quantityToRent = Integer.parseInt(qtylbl.getText().trim());
-        if (quantityToRent < 0) {
-            JOptionPane.showMessageDialog(this, "Quantity must be greater than zero.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
-            return;
+            quantityToRent = Integer.parseInt(qtylbl.getText().trim());
+            if (quantityToRent < 0) {
+                JOptionPane.showMessageDialog(this, "Quantity must be greater than zero.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
+                return;
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Please enter a valid numeric quantity.", "Invalid Input", JOptionPane.WARNING_MESSAGE);
             return;
-    }
-        
-        
+        }
+
         if (quantityToRent > availableQuantity) {
             JOptionPane.showMessageDialog(this, "Not enough stock available. Maximum available: " + availableQuantity, "Unavailable", JOptionPane.WARNING_MESSAGE);
             return;
-    }
-        
+        }
 
         if (jDateChooser2.getDate() == null || jDateChooser1.getDate() == null) {
             JOptionPane.showMessageDialog(this, "Please select both start and end dates.", "Date Missing", JOptionPane.WARNING_MESSAGE);
@@ -529,104 +532,73 @@ public class CustomerMain extends javax.swing.JFrame {
 
             double rentPricePerUnit = Double.parseDouble(rentPrice);
             double totalAmount = rentPricePerUnit * quantityToRent;
-            
-             JTextArea agreementTextArea = new JTextArea(30, 60);
-        agreementTextArea.setText("""
-        RENTAL AGREEMENT TERMS AND CONDITIONS
-        
+
+            JTextArea agreementTextArea = new JTextArea(30, 60);
+            agreementTextArea.setText(""" 
+            RENTAL AGREEMENT TERMS AND CONDITIONS
+
                 1. EQUIPMENT CARE:
                    - The rented equipment must be handled with care and kept in proper working condition.
                    - Any loss, theft, or damage to the equipment during the rental period is the responsibility of the renter and may result in additional charges ranging up to 10,000.
-        
+
                 2. RETURN POLICY:
                    - The equipment must be returned on or before the agreed return date.
                    - Late returns will incur a penalty fee of [PENALTY RATE] per day, calculated from the due date.
-        
+
                 3. PAYMENT POLICY:
                    - All rental payments are non-refundable once the equipment is picked up or delivered.
                    - Any outstanding balance must be settled before the equipment is rented out.
-        
+
                 4. INSPECTION:
                    - Equipment condition will be inspected before renting and upon return.
                    - Additional fees may apply for any damages discovered after return.
-        
+
                 5. LIABILITY:
                    - The renter assumes full responsibility for any injury or damage caused by the use of the equipment during the rental period.
                    - The company is not liable for any indirect or direct damages arising from the use of the equipment.
-        
+
                 6. AGREEMENT ACKNOWLEDGMENT:
                    - By clicking "I Agree," the renter acknowledges they have read and understood these terms and agree to comply with all conditions.
                    - Failure to comply with any of the terms above may result in termination of the rental agreement and/or additional legal action.
-        
+
                 7. OTHER TERMS:
                    - The equipment must only be used for its intended purpose.
                    - Renting under false information or misrepresentation will void this agreement immediately.
-        
-                8. DAMAGE DETAILS:
-                   - Below is a list of potential damages to the rented equipment and their associated estimated costs:
-        
-                   Equipment Damage Table:
-                                   
-                   Camera:
-                              ------------------------------------------------------------------------------------------------------------------------
-                              Damage Type                     | Description                                         | Cost
-                              ------------------------------------------------------------------------------------------------------------------------
-                              Cracked LCD Screen              | The rear screen is broken or unresponsive.          | ₱10,000
-                              Sensor Damage                   | Dust, scratches, or dead pixels on the sensor.      | ₱5,000
-                              
-                   
-                   Lights:
-                              ------------------------------------------------------------------------------------------------------------------------
-                              Damage Type                     | Description                                          | Cost
-                              ------------------------------------------------------------------------------------------------------------------------
-                              Broken Bulb or LED Panel        | Bulb or LED stops working due to impact.             | ₱5,000
-                              Power Supply Failure            | The power adapter or cord is damaged.                | ₱1,000
-                              
-                                   
-                   Lenses:
-                              ------------------------------------------------------------------------------------------------------------------------
-                              Damage Type                     | Description                                         | Cost
-                              ------------------------------------------------------------------------------------------------------------------------
-                              Focusing Ring Malfunction       | Autofocus or manual focus doesn’t work.             | ₱7,000 
-                              Lens Barrel Damage              | Dented or misaligned barrel.                        | ₱5,000 
-                                   
-                   
-                   Sounds (Microphones, Speakers, etc.):
-                              ------------------------------------------------------------------------------------------------------------------------
-                              Damage Type                     | Description                                         | Cost
-                              ------------------------------------------------------------------------------------------------------------------------
-                              Broken Microphone Capsule       | No sound pickup or distorted audio.                 | ₱4,000
-                              Cable Damage                    | Wires are frayed or cut.                            | ₱2,000
-                              
-                                   
-           By proceeding, you confirm that you understand and accept these terms and conditions.
-        """);
-        agreementTextArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(agreementTextArea);
 
-        int response = JOptionPane.showConfirmDialog(
-            this,
-            scrollPane,
-            "Rental Agreement",
-            JOptionPane.OK_CANCEL_OPTION,
-            JOptionPane.PLAIN_MESSAGE
-        );
+            By proceeding, you confirm that you understand and accept these terms and conditions.
+            """);
+            agreementTextArea.setEditable(false);
+            JScrollPane scrollPane = new JScrollPane(agreementTextArea);
 
-        if (response != JOptionPane.OK_OPTION) {
-            JOptionPane.showMessageDialog(this, "Rental process cancelled.", "Cancelled", JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
+            int response = JOptionPane.showConfirmDialog(
+                this,
+                scrollPane,
+                "Rental Agreement",
+                JOptionPane.OK_CANCEL_OPTION,
+                JOptionPane.PLAIN_MESSAGE
+            );
+
+            if (response != JOptionPane.OK_OPTION) {
+                JOptionPane.showMessageDialog(this, "Rental process cancelled.", "Cancelled", JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
             try (Connection con = DatabaseConn.connect()) {
-                String getItemQuery = "SELECT item_id FROM equipments WHERE category = ?";
+                String getItemQuery = "SELECT item_id, quantity FROM equipments WHERE category = ?";
                 try (PreparedStatement pstGetId = con.prepareStatement(getItemQuery)) {
                     pstGetId.setString(1, equipmentName);
                     ResultSet rs = pstGetId.executeQuery();
-                    
+
                     if (rs.next()) {
                         int itemId = rs.getInt("item_id");
-                        
+                        int currentQuantity = rs.getInt("quantity");
+
+                        int newQuantity = currentQuantity - quantityToRent;
+
+                        String newStatus = newQuantity > 0 ? "Available" : "Unavailable";
+
                         String insertQuery = "INSERT INTO rentals (item_id, user_id, quantity, rent_start, rent_end, total_amount, status) VALUES (?, ?, ?, ?, ?, ?, ?)";
-                        var pstInsert = con.prepareStatement(insertQuery);
+                        PreparedStatement pstInsert = con.prepareStatement(insertQuery);
                         pstInsert.setInt(1, itemId);
                         pstInsert.setString(2, UserSession.getCurrentUserID());
                         pstInsert.setInt(3, quantityToRent);
@@ -634,22 +606,23 @@ public class CustomerMain extends javax.swing.JFrame {
                         pstInsert.setString(5, rentEnd);
                         pstInsert.setDouble(6, totalAmount);
                         pstInsert.setString(7, "Rented");
-                        
+
                         int rowsInserted = pstInsert.executeUpdate();
-                        
+
                         if (rowsInserted > 0) {
                             
-                            String updateQuery = "UPDATE equipments SET quantity = quantity - ? WHERE item_id = ?";
+                            String updateQuery = "UPDATE equipments SET quantity = ?, status = ? WHERE item_id = ?";
                             PreparedStatement pstUpdate = con.prepareStatement(updateQuery);
-                            pstUpdate.setInt(1, itemId);
-                            pstUpdate.setInt(2, quantityToRent);
+                            pstUpdate.setInt(1, newQuantity);
+                            pstUpdate.setString(2, newStatus);
+                            pstUpdate.setInt(3, itemId);
                             pstUpdate.executeUpdate();
-                            
-                            EquipmentsTbl.setValueAt(availableQuantity - quantityToRent, selectedRow, 5);
-                            if (availableQuantity - quantityToRent == 0) {
-                                EquipmentsTbl.setValueAt("Unavailable", selectedRow, 6);
-                            }
-                            
+
+                            EquipmentsTbl.setValueAt(newQuantity, selectedRow, 5); 
+                            EquipmentsTbl.setValueAt(newStatus, selectedRow, 6); 
+
+                            loadEquipments();
+
                             JOptionPane.showMessageDialog(this, "Equipment rented successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
                         } else {
                             JOptionPane.showMessageDialog(this, "Failed to rent the equipment. Please try again.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -658,6 +631,8 @@ public class CustomerMain extends javax.swing.JFrame {
                         JOptionPane.showMessageDialog(this, "Equipment not found in the database.", "Error", JOptionPane.ERROR_MESSAGE);
                     }
                 }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
@@ -672,90 +647,15 @@ public class CustomerMain extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_SearchBarFldActionPerformed
 
-    private boolean rentEquipment(String item_id, String rentPrice, int user_id) {
-    boolean success = false;
+    private void CustomerAccBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CustomerAccBtnMouseClicked
+        UserAcc user = new UserAcc();
+        user.setVisible(true);
+        user.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_CustomerAccBtnMouseClicked
 
-    String updateQuery = "UPDATE equipments SET availability = 'Rented' WHERE item_id = ?";
-    String insertQuery = "INSERT INTO rentals (user_id, item_id, rent_price, rental_date, quantity) VALUES (?, ?, ?, NOW(), ?)";
 
-    try (Connection con = DatabaseConn.connect();
-         PreparedStatement stmtUpdate = con.prepareStatement(updateQuery);
-         PreparedStatement stmtInsert = con.prepareStatement(insertQuery)) {
 
-        con.setAutoCommit(false); // Start transaction
-
-        // Update equipment availability
-        stmtUpdate.setString(1, item_id);
-        int rowsUpdated = stmtUpdate.executeUpdate();
-
-        if (rowsUpdated > 0) {
-            stmtInsert.setInt(1, user_id);
-            stmtInsert.setString(2, item_id);
-            stmtInsert.setDouble(3, Double.parseDouble(rentPrice));
-            stmtInsert.setInt(4, 1);
-            int rowsInserted = stmtInsert.executeUpdate();
-
-            if (rowsInserted > 0) {
-                con.commit();
-                success = true;
-            } else {
-                con.rollback();
-            }
-        } else {
-            con.rollback();
-        }
-
-    } catch (SQLException e) {
-        // Rollback in case of any exception
-        if (e.getSQLState() != null) {
-            System.err.println("Database Error: " + e.getMessage());
-        }
-    } catch (NumberFormatException e) {
-        System.err.println("Invalid rent price format: " + rentPrice);
-    }
-
-    return success;
-}
-
-private boolean updateAvailabilityInfers(int item_id, String newAvailability) {
-    String query = "UPDATE equipments SET status = ? WHERE equipments.item_id = ?";
-
-    try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
-        Statement stmt = conn.createStatement()){
-
-        int rowsAffected = stmt.executeUpdate(query);
-
-        return rowsAffected > 0; 
-    } catch (SQLException e) {
-        return false;
-    }
-}
-
-private String fetchRentPrice(String item_id) {
-    String rentPrice = ""; 
-    Connection con = DatabaseConn.connect();
-    Statement st = null;
-    ResultSet rs = null;
-
-    try {
-        String query = "SELECT rent_price FROM equipments WHERE equipments.item_id = '" + item_id + "'";
-        st = con.createStatement();
-        rs = st.executeQuery(query);
-
-        if (rs.next()) {
-            rentPrice = rs.getString("rent_price"); 
-        }
-    } catch (Exception e) {
-    } finally {
-        try {
-            if (rs != null) rs.close();
-            if (st != null) st.close();
-            if (con != null) con.close();
-        } catch (Exception e) {
-        }
-    }
-    return rentPrice; 
-}
 
 private void fetchEquipmentByCategory(String category) {
     String Category, Brand, model_num, RentPrice, Availability;
