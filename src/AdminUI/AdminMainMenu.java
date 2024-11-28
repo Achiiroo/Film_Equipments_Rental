@@ -32,9 +32,7 @@ public class AdminMainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        rentalRecBtn = new javax.swing.JButton();
         updatePayBtn = new javax.swing.JButton();
-        rentalstatusBtn = new javax.swing.JButton();
         payHistoryBtn = new javax.swing.JButton();
         EquipmentsBtn = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -51,45 +49,25 @@ public class AdminMainMenu extends javax.swing.JFrame {
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.setLayout(null);
 
-        rentalRecBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        rentalRecBtn.setText("Rental Record");
-        rentalRecBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rentalRecBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(rentalRecBtn);
-        rentalRecBtn.setBounds(570, 400, 280, 70);
-
         updatePayBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        updatePayBtn.setText("Update Payment");
+        updatePayBtn.setText("Payment Records");
         updatePayBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updatePayBtnActionPerformed(evt);
             }
         });
         jPanel1.add(updatePayBtn);
-        updatePayBtn.setBounds(570, 240, 280, 70);
-
-        rentalstatusBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        rentalstatusBtn.setText("Update Rental Status");
-        rentalstatusBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rentalstatusBtnActionPerformed(evt);
-            }
-        });
-        jPanel1.add(rentalstatusBtn);
-        rentalstatusBtn.setBounds(570, 320, 280, 70);
+        updatePayBtn.setBounds(570, 290, 280, 70);
 
         payHistoryBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        payHistoryBtn.setText("View Payment History");
+        payHistoryBtn.setText("Rental Records");
         payHistoryBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 payHistoryBtnActionPerformed(evt);
             }
         });
         jPanel1.add(payHistoryBtn);
-        payHistoryBtn.setBounds(570, 480, 280, 70);
+        payHistoryBtn.setBounds(570, 420, 280, 70);
 
         EquipmentsBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
         EquipmentsBtn.setText("Equipments");
@@ -99,7 +77,7 @@ public class AdminMainMenu extends javax.swing.JFrame {
             }
         });
         jPanel1.add(EquipmentsBtn);
-        EquipmentsBtn.setBounds(570, 160, 280, 70);
+        EquipmentsBtn.setBounds(570, 170, 280, 70);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/film 3 blur (1000 x 490 px).png"))); // NOI18N
         jPanel1.add(jLabel1);
@@ -156,21 +134,9 @@ public class AdminMainMenu extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_EquipmentsBtnActionPerformed
 
-    private void rentalstatusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentalstatusBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_rentalstatusBtnActionPerformed
-
     private void updatePayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePayBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_updatePayBtnActionPerformed
-
-    private void rentalRecBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentalRecBtnActionPerformed
-        RentalRecord rent = new RentalRecord();
-        rent.setVisible(true);
-        rent.pack();
-        rent.setLocationRelativeTo(null);
-        this.dispose();
-    }//GEN-LAST:event_rentalRecBtnActionPerformed
 
     private void payHistoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payHistoryBtnActionPerformed
         ViewPaymentHistory pay = new ViewPaymentHistory();
@@ -184,38 +150,6 @@ public class AdminMainMenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jLabel6ComponentMoved
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AdminMainMenu().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton EquipmentsBtn;
@@ -226,8 +160,6 @@ public class AdminMainMenu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton payHistoryBtn;
-    private javax.swing.JButton rentalRecBtn;
-    private javax.swing.JButton rentalstatusBtn;
     private javax.swing.JButton updatePayBtn;
     // End of variables declaration//GEN-END:variables
 }

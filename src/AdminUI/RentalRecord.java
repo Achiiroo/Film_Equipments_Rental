@@ -4,6 +4,10 @@
  */
 package AdminUI;
 
+import javax.swing.RowFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author Mary Jhezl
@@ -29,11 +33,11 @@ public class RentalRecord extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        SearchBarFld = new javax.swing.JTextField();
+        SearchFld = new javax.swing.JTextField();
         searchbtn = new javax.swing.JButton();
         backBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        DeleteTbl = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(1100, 500));
@@ -50,13 +54,18 @@ public class RentalRecord extends javax.swing.JFrame {
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BRBLogo.png"))); // NOI18N
         jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 160, 90));
 
-        SearchBarFld.setBackground(new java.awt.Color(102, 102, 102));
-        SearchBarFld.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                SearchBarFldKeyReleased(evt);
+        SearchFld.setBackground(new java.awt.Color(102, 102, 102));
+        SearchFld.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SearchFldActionPerformed(evt);
             }
         });
-        jPanel3.add(SearchBarFld, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 450, -1));
+        SearchFld.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                SearchFldKeyReleased(evt);
+            }
+        });
+        jPanel3.add(SearchFld, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 30, 450, -1));
 
         searchbtn.setText("Search");
         searchbtn.addActionListener(new java.awt.event.ActionListener() {
@@ -72,11 +81,11 @@ public class RentalRecord extends javax.swing.JFrame {
                 backBtnActionPerformed(evt);
             }
         });
-        jPanel3.add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(900, 30, 70, -1));
+        jPanel3.add(backBtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 30, 70, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1110, 90));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        DeleteTbl.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -87,7 +96,7 @@ public class RentalRecord extends javax.swing.JFrame {
                 "RentalID", "UserID", "ItemID", "Rent Start", "Rent End", "Total Amount", "Status"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(DeleteTbl);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 90, 1100, 500));
 
@@ -107,12 +116,21 @@ public class RentalRecord extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void SearchBarFldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchBarFldKeyReleased
+    private void SearchFldKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SearchFldKeyReleased
         searchbtnActionPerformed(null);
-    }//GEN-LAST:event_SearchBarFldKeyReleased
+    }//GEN-LAST:event_SearchFldKeyReleased
 
     private void searchbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchbtnActionPerformed
+        DefaultTableModel ob = (DefaultTableModel) DeleteTbl.getModel();
+        TableRowSorter <DefaultTableModel> obj = new TableRowSorter<>(ob);
+        DeleteTbl.setRowSorter(obj);
         
+        String searchKeyword = SearchFld.getText().trim();
+        if (!searchKeyword.isEmpty()) {
+        obj.setRowFilter(RowFilter.regexFilter("(?i)" + searchKeyword)); 
+        } else {
+        obj.setRowFilter(null);
+        }        
     }//GEN-LAST:event_searchbtnActionPerformed
 
     private void backBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backBtnActionPerformed
@@ -123,49 +141,19 @@ public class RentalRecord extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backBtnActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RentalRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RentalRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RentalRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RentalRecord.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void SearchFldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SearchFldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SearchFldActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RentalRecord().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField SearchBarFld;
+    private javax.swing.JTable DeleteTbl;
+    private javax.swing.JTextField SearchFld;
     private javax.swing.JButton backBtn;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton searchbtn;
     // End of variables declaration//GEN-END:variables
 }
