@@ -136,6 +136,7 @@ public class CustomerMain extends javax.swing.JFrame {
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         imagelbl = new javax.swing.JLabel();
         Returnbtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         jList1.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
@@ -146,6 +147,8 @@ public class CustomerMain extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 500));
+        setPreferredSize(new java.awt.Dimension(1050, 620));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
@@ -179,24 +182,28 @@ public class CustomerMain extends javax.swing.JFrame {
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(87, 87, 87)
+                .addGap(134, 134, 134)
                 .addComponent(SearchBarFld, javax.swing.GroupLayout.PREFERRED_SIZE, 475, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(searchbtn)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 183, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addComponent(CustomerAccBtn)
                 .addGap(30, 30, 30))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addComponent(SearchBarFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(searchbtn))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CustomerAccBtn)
-                .addContainerGap())
+                .addContainerGap(14, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addComponent(CustomerAccBtn)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SearchBarFld, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(searchbtn))
+                        .addGap(23, 23, 23))))
+            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         jPanel1.add(jPanel5);
@@ -316,18 +323,22 @@ public class CustomerMain extends javax.swing.JFrame {
         jPanel9.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 170, 100, -1));
         jPanel9.add(RentPricelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 240, -1));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Rent End:");
         jPanel9.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 70, 100, -1));
         jPanel9.add(EquipmentNamelbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 240, -1));
 
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Brand:");
         jPanel9.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 100, -1));
         jPanel9.add(Brandlbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 240, -1));
 
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Model:");
         jPanel9.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 100, -1));
         jPanel9.add(ModelLbl, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 100, 240, -1));
 
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Rent Price:");
         jPanel9.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 140, 100, -1));
 
@@ -340,9 +351,11 @@ public class CustomerMain extends javax.swing.JFrame {
         jPanel9.add(RentBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, -1, -1));
         jPanel9.add(jDateChooser1, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 90, 150, -1));
 
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Equipment Name:");
         jPanel9.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 100, -1));
 
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
         jLabel10.setText("Rent Start:");
         jPanel9.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 20, 100, -1));
         jPanel9.add(jDateChooser2, new org.netbeans.lib.awtextra.AbsoluteConstraints(660, 40, 150, -1));
@@ -357,6 +370,10 @@ public class CustomerMain extends javax.swing.JFrame {
             }
         });
         jPanel9.add(Returnbtn, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 180, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/film 3 blur (1000 x 800 px).png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        jPanel9.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 250));
 
         jPanel1.add(jPanel9);
         jPanel9.setBounds(190, 340, 870, 240);
@@ -450,6 +467,7 @@ public class CustomerMain extends javax.swing.JFrame {
     }//GEN-LAST:event_ReturnbtnActionPerformed
 
     private void RentBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RentBtn1ActionPerformed
+
         int selectedRow = EquipmentsTbl.getSelectedRow();
 
     if (selectedRow < 0) { // Changed to < 0 to correctly detect no selection
@@ -717,6 +735,14 @@ private void fetchEquipmentByCategory(String category) {
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -741,6 +767,7 @@ private void fetchEquipmentByCategory(String category) {
     private javax.swing.JLabel imagelbl;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

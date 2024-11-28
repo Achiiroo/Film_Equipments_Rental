@@ -17,6 +17,9 @@ public class AdminMainMenu extends javax.swing.JFrame {
      */
     public AdminMainMenu() {
         initComponents();
+        setVisible(true);
+        setLocationRelativeTo(null);
+        this.dispose();
     }
 
     /**
@@ -29,183 +32,157 @@ public class AdminMainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        rentalRecBtn = new javax.swing.JButton();
+        updatePayBtn = new javax.swing.JButton();
+        rentalstatusBtn = new javax.swing.JButton();
+        payHistoryBtn = new javax.swing.JButton();
+        EquipmentsBtn = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        LogOutBtn = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        AddEquipmentBtn = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
-        jButton9 = new javax.swing.JButton();
-        jButton10 = new javax.swing.JButton();
-        jButton11 = new javax.swing.JButton();
+        LogOutBtn1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.setPreferredSize(new java.awt.Dimension(400, 400));
+        jPanel1.setPreferredSize(new java.awt.Dimension(1000, 600));
         jPanel1.setLayout(null);
 
+        rentalRecBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        rentalRecBtn.setText("Rental Record");
+        rentalRecBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rentalRecBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rentalRecBtn);
+        rentalRecBtn.setBounds(570, 400, 280, 70);
+
+        updatePayBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        updatePayBtn.setText("Update Payment");
+        updatePayBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updatePayBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(updatePayBtn);
+        updatePayBtn.setBounds(570, 240, 280, 70);
+
+        rentalstatusBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        rentalstatusBtn.setText("Update Rental Status");
+        rentalstatusBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rentalstatusBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(rentalstatusBtn);
+        rentalstatusBtn.setBounds(570, 320, 280, 70);
+
+        payHistoryBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        payHistoryBtn.setText("View Payment History");
+        payHistoryBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payHistoryBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(payHistoryBtn);
+        payHistoryBtn.setBounds(570, 480, 280, 70);
+
+        EquipmentsBtn.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        EquipmentsBtn.setText("Equipments");
+        EquipmentsBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EquipmentsBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(EquipmentsBtn);
+        EquipmentsBtn.setBounds(570, 160, 280, 70);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/film 3 blur (1000 x 490 px).png"))); // NOI18N
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(0, 110, 1000, 490);
+
         jPanel3.setBackground(new java.awt.Color(21, 25, 28));
+        jPanel3.setName(""); // NOI18N
+        jPanel3.setPreferredSize(new java.awt.Dimension(599, 125));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/BRBLogo.png"))); // NOI18N
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 150, 110));
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Helvetica", 0, 12)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Helvetica", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Welcome Back, Admin!");
-
-        LogOutBtn.setText("Log Out");
-        LogOutBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                LogOutBtnActionPerformed(evt);
+        jLabel6.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                jLabel6ComponentMoved(evt);
             }
         });
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, -1, 60));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel5)
-                .addGap(20, 20, 20)
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LogOutBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(LogOutBtn))
-                .addGap(36, 36, 36))
-        );
+        LogOutBtn1.setText("Log Out");
+        LogOutBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogOutBtn1ActionPerformed(evt);
+            }
+        });
+        jPanel3.add(LogOutBtn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(870, 40, -1, -1));
 
         jPanel1.add(jPanel3);
-        jPanel3.setBounds(0, 0, 400, 90);
-
-        jPanel2.setBackground(new java.awt.Color(221, 221, 221));
-        jPanel2.setForeground(new java.awt.Color(153, 153, 153));
-
-        AddEquipmentBtn.setText("Equipments");
-        AddEquipmentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AddEquipmentBtnActionPerformed(evt);
-            }
-        });
-
-        jButton8.setText("Update Rental Status");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        jButton9.setText("Rental Record");
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton9ActionPerformed(evt);
-            }
-        });
-
-        jButton10.setText("View Payment History");
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton10ActionPerformed(evt);
-            }
-        });
-
-        jButton11.setText("Update Payment");
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton11ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(130, 130, 130)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton8)
-                            .addComponent(jButton10)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(9, 9, 9)
-                                .addComponent(jButton11))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(147, 147, 147)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AddEquipmentBtn)
-                            .addComponent(jButton9))))
-                .addContainerGap(129, Short.MAX_VALUE))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(AddEquipmentBtn)
-                .addGap(28, 28, 28)
-                .addComponent(jButton9)
-                .addGap(30, 30, 30)
-                .addComponent(jButton8)
-                .addGap(30, 30, 30)
-                .addComponent(jButton11)
-                .addGap(26, 26, 26)
-                .addComponent(jButton10)
-                .addContainerGap(33, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel2);
-        jPanel2.setBounds(0, 100, 400, 300);
+        jPanel3.setBounds(0, 0, 1000, 110);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LogOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtnActionPerformed
-         Login MainMenu = new Login();
+    private void LogOutBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogOutBtn1ActionPerformed
+        Login MainMenu = new Login();
         MainMenu.setVisible(true);
         MainMenu.pack();
         MainMenu.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_LogOutBtnActionPerformed
+    }//GEN-LAST:event_LogOutBtn1ActionPerformed
 
-    private void AddEquipmentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddEquipmentBtnActionPerformed
-        CRUDequipment add = new CRUDequipment();
-        add.setVisible(true);
-        add.pack();
-        add.setLocationRelativeTo(null);
+    private void EquipmentsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EquipmentsBtnActionPerformed
+        CRUDequipment eq = new CRUDequipment();
+        eq.setVisible(true);
+        eq.pack();
+        eq.setLocationRelativeTo(null);
         this.dispose();
-    }//GEN-LAST:event_AddEquipmentBtnActionPerformed
+    }//GEN-LAST:event_EquipmentsBtnActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void rentalstatusBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentalstatusBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton8ActionPerformed
+    }//GEN-LAST:event_rentalstatusBtnActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void updatePayBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updatePayBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton9ActionPerformed
+    }//GEN-LAST:event_updatePayBtnActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton10ActionPerformed
+    private void rentalRecBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentalRecBtnActionPerformed
+        RentalRecord rent = new RentalRecord();
+        rent.setVisible(true);
+        rent.pack();
+        rent.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_rentalRecBtnActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void payHistoryBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payHistoryBtnActionPerformed
+        ViewPaymentHistory pay = new ViewPaymentHistory();
+        pay.setVisible(true);
+        pay.pack();
+        pay.setLocationRelativeTo(null);
+        this.dispose();
+    }//GEN-LAST:event_payHistoryBtnActionPerformed
+
+    private void jLabel6ComponentMoved(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel6ComponentMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }//GEN-LAST:event_jLabel6ComponentMoved
 
     /**
      * @param args the command line arguments
@@ -233,6 +210,69 @@ public class AdminMainMenu extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AdminMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -243,16 +283,16 @@ public class AdminMainMenu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton AddEquipmentBtn;
-    private javax.swing.JButton LogOutBtn;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
+    private javax.swing.JButton EquipmentsBtn;
+    private javax.swing.JButton LogOutBtn1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton payHistoryBtn;
+    private javax.swing.JButton rentalRecBtn;
+    private javax.swing.JButton rentalstatusBtn;
+    private javax.swing.JButton updatePayBtn;
     // End of variables declaration//GEN-END:variables
 }
