@@ -149,10 +149,10 @@ public class AdminMainMenu extends javax.swing.JFrame {
     }//GEN-LAST:event_LogOutBtn1ActionPerformed
 
     private void EquipmentsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EquipmentsBtnActionPerformed
-        CRUDequipment eq = new CRUDequipment();
-        eq.setVisible(true);
-        eq.pack();
-        eq.setLocationRelativeTo(null);
+        CRUDequipment eqpmt = new CRUDequipment();
+        eqpmt.setVisible(true);
+        eqpmt.pack();
+        eqpmt.setLocationRelativeTo(null);
         this.dispose();
     }//GEN-LAST:event_EquipmentsBtnActionPerformed
 

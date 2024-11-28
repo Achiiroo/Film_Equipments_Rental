@@ -124,7 +124,7 @@ public class CRUDequipment extends javax.swing.JFrame {
     }
 }
     private void populateTable(JTable EquipmentsTbl) {
-    String query = "SELECT item_id, category, brand, model_num, availability, rent_price, Quantity FROM equipments";
+    String query = "SELECT item_id, category, brand, model_num, status, rent_price, Quantity FROM equipments";
 
     try (Connection con = getConnection();
          Statement stmt = con.createStatement();
@@ -190,9 +190,10 @@ public class CRUDequipment extends javax.swing.JFrame {
     ModelNumLbl.setText("");
     quantityLbl.setText("");
     RentPriceLbl.setText("");
-    AvailabilityLbl.setText("");
-    imagelbl.setIcon(null);
+    StatusCmbBx.setSelectedIndex(-1); // Clear selection in JComboBox
+    imagelbl.setIcon(null); // Clear image
 }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -223,11 +224,11 @@ public class CRUDequipment extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         EquipmentIDLbl = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        AvailabilityLbl = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         quantityLbl = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         EquipmentTbl = new javax.swing.JTable();
+        StatusCmbBx = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -336,6 +337,13 @@ public class CRUDequipment extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(EquipmentTbl);
 
+        StatusCmbBx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Available", "Not Available", " " }));
+        StatusCmbBx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StatusCmbBxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -385,7 +393,7 @@ public class CRUDequipment extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(RentPriceLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(AvailabilityLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(StatusCmbBx, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(81, Short.MAX_VALUE))
@@ -416,10 +424,10 @@ public class CRUDequipment extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(RentPriceLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(AvailabilityLbl, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(38, 38, 38)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(StatusCmbBx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(imagechooserbtn)
                     .addComponent(imagelbl, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -453,7 +461,7 @@ public class CRUDequipment extends javax.swing.JFrame {
              InputStream img = new FileInputStream(new File(ImagePath))) {
              
             PreparedStatement ps = con.prepareStatement(
-                "INSERT INTO equipments(category, brand, model_num, rent_price, Quantity, availability, image) " +
+                "INSERT INTO equipments(category, brand, model_num, rent_price, Quantity, status, image) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)"
             );
 
@@ -468,7 +476,7 @@ public class CRUDequipment extends javax.swing.JFrame {
             int quantity = validateQuantity();
             if (quantity < 0) return;
             ps.setInt(5, quantity);
-            ps.setString(6, AvailabilityLbl.getText().trim());
+            ps.setString(6, StatusCmbBx.getSelectedItem().toString());
             ps.setBlob(7, img);
             ps.executeUpdate();
 
@@ -514,97 +522,124 @@ public class CRUDequipment extends javax.swing.JFrame {
     }//GEN-LAST:event_imagechooserbtnActionPerformed
 
     private void UpdateBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateBtnActionPerformed
-        if (checkInputs() && ImagePath != null) {
-    Connection con = null;
-    PreparedStatement ps = null;
-    InputStream img = null;
-    try {
-        con = getConnection();
-        if (con != null) {
-            String updateQuery;
+        if (checkInputs()) {
+        Connection con = null;
+        PreparedStatement ps = null;
+        InputStream img = null; // For image file if needed
+        try {
+            con = getConnection();
+            if (con != null) {
+                String fetchQuery = "SELECT * FROM equipments WHERE item_id = ?";
+                String insertLogQuery = "INSERT INTO update_logs (item_id, category, brand, model_num, rent_price, quantity, status, image) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                String updateQuery;
 
-            String itemIdText = EquipmentIDLbl.getText().trim();
-            int itemId;
-            try {
-                itemId = Integer.parseInt(itemIdText);
-                if (itemId <= 0) {
-                    JOptionPane.showMessageDialog(null, "Invalid Equipment ID.");
+                String itemIdText = EquipmentIDLbl.getText().trim();
+                int itemId;
+                try {
+                    itemId = Integer.parseInt(itemIdText);
+                    if (itemId <= 0) {
+                        JOptionPane.showMessageDialog(null, "Invalid Equipment ID.");
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Invalid Equipment ID. Please enter a valid number.");
                     return;
                 }
-            } catch (NumberFormatException e) {
-                JOptionPane.showMessageDialog(null, "Invalid Equipment ID. Please enter a valid number.");
-                return;
-            }
 
-            if (ImagePath == null) {
-                updateQuery = "UPDATE equipments SET category = ?, brand = ?, model_num = ?, rent_price = ?, Quantity = ?, availability = ? WHERE equipments.item_id = ?";
-                ps = con.prepareStatement(updateQuery);
+                // Fetch current equipment details
+                ps = con.prepareStatement(fetchQuery);
+                ps.setInt(1, itemId);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    // Log the current details
+                    try (PreparedStatement logPs = con.prepareStatement(insertLogQuery)) {
+                        logPs.setInt(1, rs.getInt("item_id"));
+                        logPs.setString(2, rs.getString("category"));
+                        logPs.setString(3, rs.getString("brand"));
+                        logPs.setString(4, rs.getString("model_num"));
+                        logPs.setDouble(5, rs.getDouble("rent_price"));
+                        logPs.setInt(6, rs.getInt("quantity"));
+                        logPs.setString(7, rs.getString("status"));
+                        logPs.setBlob(8, rs.getBlob("image"));
+                        logPs.executeUpdate();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "No equipment found with the specified ID.");
+                    return;
+                }
 
-                ps.setString(1, CategoryLbl.getText().trim());
-                ps.setString(2, BrandLbl.getText().trim());
-                ps.setString(3, ModelNumLbl.getText().trim());
+                // Prepare Update query based on whether the image is being updated or not
+                if (ImagePath == null) {  // No image change
+                    updateQuery = "UPDATE equipments SET category = ?, brand = ?, model_num = ?, rent_price = ?, Quantity = ?, status = ? WHERE item_id = ?";
+                    ps = con.prepareStatement(updateQuery);
+                    ps.setString(1, CategoryLbl.getText().trim());
+                    ps.setString(2, BrandLbl.getText().trim());
+                    ps.setString(3, ModelNumLbl.getText().trim());
 
-                double rentPrice = validateRentPrice();
-                if (rentPrice < 0) return;
-                ps.setDouble(4, rentPrice);
+                    double rentPrice = validateRentPrice();
+                    if (rentPrice < 0) return;
+                    ps.setDouble(4, rentPrice);
 
-                int quantity = validateQuantity();
-                if (quantity < 0) return;
-                ps.setInt(5, quantity);
-                ps.setString(6, AvailabilityLbl.getText().trim());
-                ps.setInt(7, itemId);
+                    int quantity = validateQuantity();
+                    if (quantity < 0) return;
+                    ps.setInt(5, quantity);
+
+                    ps.setString(6, StatusCmbBx.getSelectedItem().toString());  // Use ComboBox value
+                    ps.setInt(7, itemId);  // Use the item ID
+
+                } else {  // Image change
+                    img = new FileInputStream(new File(ImagePath));
+
+                    updateQuery = "UPDATE equipments SET category = ?, brand = ?, model_num = ?, rent_price = ?, Quantity = ?, status = ?, image = ? WHERE item_id = ?";
+                    ps = con.prepareStatement(updateQuery);
+
+                    ps.setString(1, CategoryLbl.getText().trim());
+                    ps.setString(2, BrandLbl.getText().trim());
+                    ps.setString(3, ModelNumLbl.getText().trim());
+
+                    double rentPrice = validateRentPrice();
+                    if (rentPrice < 0) return;
+                    ps.setDouble(4, rentPrice);
+
+                    int quantity = validateQuantity();
+                    if (quantity < 0) return;
+                    ps.setInt(5, quantity);
+
+                    ps.setString(6, StatusCmbBx.getSelectedItem().toString());  // Use ComboBox value
+                    ps.setBlob(7, img);  // Set the image if it's changed
+                    ps.setInt(8, itemId);  // Use the item ID
+                }
+
+                // Execute the update
+                int rowsUpdated = ps.executeUpdate();
+                if (rowsUpdated > 0) {
+                    JOptionPane.showMessageDialog(null, "Equipment updated successfully!");
+                    populateTable(EquipmentTbl);  // Refresh the equipment table
+                } else {
+                    JOptionPane.showMessageDialog(null, "No equipment found with the specified ID.");
+                }
             } else {
-                img = new FileInputStream(new File(ImagePath));
-
-                updateQuery = "UPDATE equipments SET category = ?, brand = ?, model_num = ?, rent_price = ?, Quantity = ?, availability = ?, image = ? WHERE equipments.item_id = ?";
-                ps = con.prepareStatement(updateQuery);
-
-                ps.setString(1, CategoryLbl.getText().trim());
-                ps.setString(2, BrandLbl.getText().trim());
-                ps.setString(3, ModelNumLbl.getText().trim());
-
-                double rentPrice = validateRentPrice();
-                if (rentPrice < 0) return;
-                ps.setDouble(4, rentPrice);
-
-                int quantity = validateQuantity();
-                if (quantity < 0) return;
-                ps.setInt(5, quantity);
-                ps.setString(6, AvailabilityLbl.getText().trim());
-                ps.setBlob(7, img);
-                ps.setInt(8, itemId);
+                JOptionPane.showMessageDialog(null, "Database connection failed. Please check your connection settings.");
             }
-
-            int rowsUpdated = ps.executeUpdate();
-            if (rowsUpdated > 0) {
-                JOptionPane.showMessageDialog(null, "Equipment updated successfully!");
-                populateTable(EquipmentTbl);
-            } else {
-                JOptionPane.showMessageDialog(null, "No equipment found with the specified ID.");
+        } catch (SQLException | FileNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "Error occurred: " + e.getMessage());
+            Logger.getLogger(CRUDequipment.class.getName()).log(Level.SEVERE, "SQL Error", e);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage());
+        } finally {
+            try {
+                if (ps != null) ps.close();
+                if (con != null) con.close();
+                if (img != null) img.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(CRUDequipment.class.getName()).log(Level.SEVERE, "Closing Connection Error", ex);
+            } catch (IOException e) {
+                Logger.getLogger(CRUDequipment.class.getName()).log(Level.SEVERE, "Closing InputStream Error", e);
             }
-
-        } else {
-            JOptionPane.showMessageDialog(null, "Database connection failed. Please check your connection settings.");
         }
-    } catch (SQLException | FileNotFoundException e) {
-        JOptionPane.showMessageDialog(null, "Error occurred: " + e.getMessage());
-        Logger.getLogger(CRUDequipment.class.getName()).log(Level.SEVERE, "SQL Error", e);
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Unexpected error: " + e.getMessage());
-    } finally {
-        try {
-            if (ps != null) ps.close();
-            if (con != null) con.close();
-            if (img != null) img.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(CRUDequipment.class.getName()).log(Level.SEVERE, "Closing Connection Error", ex);
-        } catch (IOException e) {
-            Logger.getLogger(CRUDequipment.class.getName()).log(Level.SEVERE, "Closing InputStream Error", e);
-        }
+    } else {
+        JOptionPane.showMessageDialog(null, "Please fill all fields and select an image.");
     }
-} else {
-    JOptionPane.showMessageDialog(null, "Please fill all fields and select an image.");
-}
     }//GEN-LAST:event_UpdateBtnActionPerformed
 
     private void DeleteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteBtnActionPerformed
@@ -656,7 +691,7 @@ public class CRUDequipment extends javax.swing.JFrame {
             String category = table.getValueAt(selectedRow, 1).toString();
             String brand = table.getValueAt(selectedRow, 2).toString();
             String modelNum = table.getValueAt(selectedRow, 3).toString();
-            String availability = table.getValueAt(selectedRow, 4).toString();
+            String status = table.getValueAt(selectedRow, 4).toString();
             String rentPrice = table.getValueAt(selectedRow, 5).toString();
             String quantity = table.getValueAt(selectedRow, 6).toString();
 
@@ -664,13 +699,17 @@ public class CRUDequipment extends javax.swing.JFrame {
             CategoryLbl.setText(category);
             BrandLbl.setText(brand);
             ModelNumLbl.setText(modelNum);
-            AvailabilityLbl.setText(availability);
+            StatusCmbBx.setSelectedItem(status);
             RentPriceLbl.setText(rentPrice);
             quantityLbl.setText(quantity);
             
             loadImageForEquipment(itemId);
         }
     }//GEN-LAST:event_EquipmentTblMouseClicked
+
+    private void StatusCmbBxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatusCmbBxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_StatusCmbBxActionPerformed
 
 
     /**
@@ -687,7 +726,6 @@ public class CRUDequipment extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField AvailabilityLbl;
     private javax.swing.JTextField BrandLbl;
     private javax.swing.JButton CancelBtn;
     private javax.swing.JTextField CategoryLbl;
@@ -696,6 +734,7 @@ public class CRUDequipment extends javax.swing.JFrame {
     private javax.swing.JTable EquipmentTbl;
     private javax.swing.JTextField ModelNumLbl;
     private javax.swing.JTextField RentPriceLbl;
+    private javax.swing.JComboBox<String> StatusCmbBx;
     private javax.swing.JButton UpdateBtn;
     private javax.swing.JButton addBtn;
     private javax.swing.JButton imagechooserbtn;

@@ -35,14 +35,14 @@ public class CustomerMain extends javax.swing.JFrame {
 
     
     private void loadEquipments() {
-        String Eid, Category, Brand, Model, RentPrice, Availability;
+        String Eid, Category, Brand, Model, RentPrice, Status;
         int Quantity;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
             Statement st = con.createStatement();
 
-            String query = "SELECT item_id, category, brand, model_num, rent_price, Quantity, availability "
+            String query = "SELECT item_id, category, brand, model_num, rent_price, Quantity, status "
                      + "FROM equipments "
                      + "ORDER BY FIELD(category, 'Camera', 'Lense', 'Lights', 'Sound')";
 
@@ -66,9 +66,9 @@ public class CustomerMain extends javax.swing.JFrame {
                 Model = rs.getString("model_num");
                 RentPrice = rs.getString("rent_price");
                 Quantity = rs.getInt("Quantity");
-                Availability = rs.getString("availability");
+                Status = rs.getString("status");
 
-                String[] row = {Eid, Category, Brand, Model, RentPrice, String.valueOf(Quantity), Availability};
+                String[] row = {Eid, Category, Brand, Model, RentPrice, String.valueOf(Quantity), Status};
                 model.addRow(row);
             }
 
@@ -193,7 +193,7 @@ public class CustomerMain extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(CustomerAccBtn)
@@ -476,11 +476,11 @@ public class CustomerMain extends javax.swing.JFrame {
     }
     String brand = EquipmentsTbl.getValueAt(selectedRow, 1).toString();
     String modelNum = EquipmentsTbl.getValueAt(selectedRow, 2).toString(); // Added to get model_num
-    String availability = EquipmentsTbl.getValueAt(selectedRow, 5).toString();
+    String status = EquipmentsTbl.getValueAt(selectedRow, 5).toString();
     String rentPrice = EquipmentsTbl.getValueAt(selectedRow, 3).toString();
     int quantity = Integer.parseInt(EquipmentsTbl.getValueAt(selectedRow, 4).toString());
 
-    if ("Rented".equalsIgnoreCase(availability) || quantity <= 0) {
+    if ("Rented".equalsIgnoreCase(status) || quantity <= 0) {
         JOptionPane.showMessageDialog(this, "This equipment is not available for rent.", "Unavailable", JOptionPane.WARNING_MESSAGE);
         return;
     }
@@ -535,7 +535,7 @@ public class CustomerMain extends javax.swing.JFrame {
 
                         if (rowsInserted > 0) {
                             // Update equipment availability and quantity
-                            String updateQuery = "UPDATE equipments SET quantity = quantity - 1, availability = ? WHERE equipments.item_id = ?";
+                            String updateQuery = "UPDATE equipments SET quantity = quantity - 1, status = ? WHERE equipments.item_id = ?";
                             try (PreparedStatement pstUpdate = con.prepareStatement(updateQuery)) {
                                 pstUpdate.setString(1, quantity - 1 == 0 ? "Rented" : "Available");
                                 pstUpdate.setInt(2, itemId);
@@ -572,7 +572,7 @@ public class CustomerMain extends javax.swing.JFrame {
         Class.forName("com.mysql.cj.jdbc.Driver");
         con = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
         con.setAutoCommit(false);
-        String updateQuery = "UPDATE equipments SET availability = 'Rented' WHERE item_id = ?";
+        String updateQuery = "UPDATE equipments SET status = 'Rented' WHERE item_id = ?";
         stmtUpdate = con.prepareStatement(updateQuery); 
         int rowsUpdated = stmtUpdate.executeUpdate(updateQuery);
 
@@ -615,7 +615,7 @@ public class CustomerMain extends javax.swing.JFrame {
 }
 
 private boolean updateAvailabilityInfers(int item_id, String newAvailability) {
-    String query = "UPDATE equipments SET Availability = ? WHERE equipments.item_id = ?";
+    String query = "UPDATE equipments SET status = ? WHERE equipments.item_id = ?";
 
     try (Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/fers", "root", "");
         Statement stmt = conn.createStatement()){
@@ -662,7 +662,7 @@ private String fetchRentPrice(String item_id) {
 }
 
 private void fetchEquipmentByCategory(String category) {
-    String query = "SELECT category, equipment_name, brand, model_num, rent_price, quantity, availability " +
+    String query = "SELECT category, equipment_name, brand, model_num, rent_price, quantity, status " +
                    "FROM equipments WHERE category = ?";
     try {
         // Establish database connection
@@ -675,7 +675,7 @@ private void fetchEquipmentByCategory(String category) {
 
             DefaultTableModel model = (DefaultTableModel) EquipmentsTbl.getModel();
             model.setRowCount(0); // Clear existing rows
-            String[] columnNames = {"Category", "Equipment Name", "Brand", "Model Number", "Rent Price", "Quantity", "Availability"};
+            String[] columnNames = {"Category", "Brand", "Model Number", "Rent Price", "Quantity", "status"};
             model.setColumnIdentifiers(columnNames);
 
             // Populate the table with query results
@@ -686,9 +686,9 @@ private void fetchEquipmentByCategory(String category) {
                 String modelNum = rs.getString("model_num");
                 String rentPrice = rs.getString("rent_price");
                 int quantity = rs.getInt("quantity");
-                String availability = rs.getString("availability");
+                String Status = rs.getString("status");
 
-                Object[] row = {categoryValue, equipmentName, brand, modelNum, rentPrice, quantity, availability};
+                Object[] row = {categoryValue, equipmentName, brand, modelNum, rentPrice, quantity, Status};
                 model.addRow(row);
             }
         }
